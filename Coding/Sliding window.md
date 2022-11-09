@@ -61,5 +61,52 @@ export function maxProfit(array) {
     }
     return maxProfit;
 }
+```
+- Given strings <code>str1</code> and <code>str2</code>, find the minimum (contiguous) substring <code>subStr</code> of <code>str1</code>, such that every character of <code>str2</code> appears in <code>subStr</code> in the same order as it is present in <code>str2</code>. <br/>
+- https://leetcode.com/problems/minimum-window-substring/description/
 
+
+```cs
+public string MinWindow(string s, string t) {        
+        var m = t.Length; //m is for length of t
+        var n = s.Length;
+        if (m > n)
+            return ""; 
+        
+        var dicT = new Dictionary<char, int>(); 
+        for (var i=0; i<m; i++) {
+            var c = t[i];
+            dicT[c] = dicT.ContainsKey(c) ? dicT[c] + 1 : 1; 
+        }
+        
+        int finalL = 0, minLen = int.MaxValue, left =0, right =0, sameKeyCount =0;
+        //sameKeyCount: Check to make sure how many keys in dicT has in dicS
+
+        var dicS = new Dictionary<char, int>();
+
+        while (right < n) {
+            var c = s[right];
+            dicS[c] = dicS.ContainsKey(c) ? dicS[c] + 1 : 1;
+            
+            //Check if dicS has character c, and if dicS has the same amount of c as dicT --> Inscrease sameKeyCount
+            if (dicT.ContainsKey(c) && dicS[c] == dicT[c])
+                sameKeyCount++; 
+
+            while(sameKeyCount == dicT.Count && left <= right) {                
+                if (minLen > right - left + 1 ) {
+                    minLen =  right - left + 1;
+                    finalL = left; 
+                }
+                //Move left 1 unit to the right, so dicS also remove s[left]
+                var removeC = s[left];
+                dicS[removeC]--;                 
+                if (dicT.ContainsKey(removeC) && dicS[removeC] == dicT[removeC] - 1 ) 
+                    sameKeyCount--;                                
+                left++;
+            }
+            right++;            
+        }
+            
+        return minLen == int.MaxValue ? "" : s.Substring(finalL, minLen) ;
+    }
 ```
