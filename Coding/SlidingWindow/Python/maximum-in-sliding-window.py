@@ -1,6 +1,5 @@
 from collections import deque
 
-
 def find_max_sliding_window(nums, window_size):
     # your code will replace this placeholder return statement
     result = []
