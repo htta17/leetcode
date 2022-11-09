@@ -37,3 +37,29 @@ export function findMaxSlidingWindow(nums, w) {
     return ans;
 }
 ```
+
+- Best Time to Buy and Sell Stock. <br/>
+Given an array where the element at the index i represents the price of a stock on day <code>i</code>, find the maximum profit that you can gain by buying the stock <i><b>once</b></i> and then selling it.
+
+
+```javascript
+export function maxProfit(array) {
+    // Your code will replace this placeholder return statement.
+    //Concept: 
+    //    Assume we buy first stock (min = array[0]), 
+    //    Loop from 1--> array.length - 1, 
+    //              try to sell it with current price, means profit is (array[i] - min)
+    //              meanwhile, we update min if min still greater than array[i]
+
+    var maxProfit = 0 ; 
+    var min = array[0]; 
+    for (var i=1; i< array.length; i++) {
+        if (maxProfit < array[i] - min) 
+            maxProfit = array[i] - min;        
+        if (min > array[i]) 
+            min = array[i];        
+    }
+    return maxProfit;
+}
+
+```
