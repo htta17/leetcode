@@ -110,3 +110,32 @@ public string MinWindow(string s, string t) {
         return minLen == int.MaxValue ? "" : s.Substring(finalL, minLen) ;
     }
 ```
+
+- Given a string s, find the length of the longest substring without repeating characters.
+- https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+```cs
+public int LengthOfLongestSubstring(string s) {        
+        //Concept: - Use a Dictionary (Hashtable) to keep LAST position of each characters
+        //         - Loop for each character 
+        //         -       If we have not seen character --> add to seen
+        //         -       If we see a character again --> Find the start (of substring) 
+        //         -            Why we need change start: "abcba" --> When we see "b", we changed start, so current substring is "cb", then
+        //         -           when see "a" again, we don't need to change start
+        //         -   
+        var seen = new Dictionary<char, int>();
+        int ans = 0, start = 0;  
+        for (int i=0; i< s.Length; i++) {
+            var c = s[i];            
+            if (!seen.ContainsKey(c)) {
+                ans = Math.Max(ans, i - start + 1);
+                seen.Add(c, i);
+            } else {
+                var lastPos = seen[c]; 
+                seen[c] = i;
+                start = Math.Max(start, lastPos + 1); 
+                ans = Math.Max(ans, i - start + 1);
+            }            
+        }
+        return ans;
+    }
+```
