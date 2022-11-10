@@ -197,3 +197,29 @@ public int FindMaxConsecutiveOnes(int[] nums) {
         return longest; 
     }
 ```
+- https://leetcode.com/problems/max-consecutive-ones-iii/description/
+- Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+- Code was get from https://youtu.be/3BWnIY97JbE
+```cs
+public int LongestOnes(int[] nums, int k) {
+    int left =0, max = 0;
+    int countOne = 0; 
+
+    for (int right=0; right< nums.Length; right++) {
+        if (nums[right] == 1) {
+            countOne++;
+        }
+        //At position [right], the substring's length is [right - left + 1], and this substring contains 
+        //[countOne] number 1, so it contains [right - left + 1 - countOne] number 0
+        //Hence, we have to make sure number of 0 less than or equals k
+        while (right - left + 1 - countOne > k) {
+            if (nums[left] == 1) {
+                countOne--;
+            }
+            left++;
+        }
+        max = Math.Max(max, right - left + 1);
+    }
+    return max; 
+}
+```
