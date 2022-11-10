@@ -140,6 +140,39 @@ public int LengthOfLongestSubstring(string s) {
     }
 ```
 
+- https://leetcode.com/problems/max-consecutive-ones/description/
+- Given a binary array nums, return the maximum number of consecutive 1's in the array.
+```cs
+//1st way (Sliding windows)
+public int FindMaxConsecutiveOnes(int[] nums) {
+    int left =0, right =0, ans = -1; 
+
+    while (right < nums.Length) {
+        if (nums[right] == 0) {
+            left = right + 1;
+        }
+        right++;
+        ans = Math.Max(ans, right - left);
+    }
+    return ans;
+}
+
+//2 way
+public int FindMaxConsecutiveOnes(int[] nums) {
+    var max = 0; 
+    var current = 0;         
+    for (int i=0; i< nums.Length; i++) {
+        if (nums[i] == 0) {
+            max = Math.Max(max, current);
+            current = 0;
+        } else {
+            current ++; 
+        }
+    }        
+    return Math.Max(max, current);        
+}
+```
+
 - Given a binary array nums, return the maximum number of consecutive 1's in the array if you can flip at most one 0.
 - https://leetcode.com/problems/max-consecutive-ones-ii/description/ 
 ```cs
@@ -149,6 +182,7 @@ public int FindMaxConsecutiveOnes(int[] nums) {
         var flip_index = -1; //Track the index of flipped number
 
         while (right < n) {
+            //If nums[right] == 1, we keep inscrease 
             if (nums[right] == 0) {               
                 if (flip_index == -1) //Have not flipped any 0 yet
                     flip_index = right;
