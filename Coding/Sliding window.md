@@ -63,6 +63,11 @@ export function maxProfit(array) {
 }
 ```
 - Given strings <code>str1</code> and <code>str2</code>, find the minimum (contiguous) substring <code>subStr</code> of <code>str1</code>, such that every character of <code>str2</code> appears in <code>subStr</code> in the same order as it is present in <code>str2</code>. <br/>
+
+```cs
+//Have not done.
+```
+- Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
 - https://leetcode.com/problems/minimum-window-substring/description/
 
 
