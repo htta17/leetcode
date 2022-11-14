@@ -299,3 +299,22 @@ public void MoveZeroes(int[] nums) {
     }
 }
 ```
+- https://www.educative.io/courses/grokking-coding-interview-patterns-javascript/B8zWXvJVgG2
+- Given an array of positive integers nums and a positive integer <code>target</code>, find the window size of the shortest contiguous subarray whose sum is greater than or equal to the target value. If no subarray is found, 0 is returned.
+```cs
+public int Minimum_Size_Subarray_Sum(int target, int[] nums)
+    {
+        int sum = 0, left = 0, right = 0, minLen = int.MaxValue;
+
+        while (right < nums.Length) {
+            sum += nums[right];
+            while (sum >= target) {
+                minLen = Math.Min(minLen, right - left + 1);
+                sum -= nums[left];
+                left++;
+            }
+            right++;
+        }
+        return minLen;
+    }
+```
