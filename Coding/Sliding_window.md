@@ -964,3 +964,27 @@ public class Solution {
     }
 }
 ```
+
+- Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+- <b>Note</b>: that you must do this in-place without making a copy of the array.
+- https://leetcode.com/explore/interview/card/facebook/5/array-and-strings/262/
+  
+```cs
+public void MoveZeroes(int[] nums) {  
+    //Move all non-zero numbers to the left
+    var index =0;
+    for (int i=0; i< nums.Length; i++) {
+        if (nums[i] != 0) {
+            if (i != index) {
+                nums[index] = nums[i]; 
+            }
+            index++; 
+        }
+    }
+    //and set all remains are 0
+    for (int i=index; i< nums.Length; i++) {
+        nums[i] = 0;
+    }
+}
+```
