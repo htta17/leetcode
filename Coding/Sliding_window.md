@@ -918,3 +918,49 @@ public int LongestOnes(int[] nums, int k) {
     return max; 
 }
 ```
+- Given two strings s and t, return true if they are both one edit distance apart, otherwise return false.
+
+A string s is said to be one distance apart from a string t if you can:
+
+- Insert exactly one character into s to get t.<br/>
+- Delete exactly one character from s to get t. <br/>
+- Replace exactly one character of s with a different character to get t. <br/>
+- https://leetcode.com/explore/interview/card/facebook/5/array-and-strings/3015/
+
+```cs
+public class Solution {
+    public bool IsOneEditDistance(string s, string t) {
+        if (s == t)
+            return false; 
+        
+        if (Math.Abs(s.Length - t.Length) > 1)
+            return false;
+        
+        int left_s = -1, left_t = -1, right_s = s.Length, right_t = t.Length;
+        
+        while (left_s + 1 < s.Length && left_t + 1 < t.Length && s[left_s + 1] == t[left_t + 1]) {
+            left_s++; 
+            left_t++;
+        }
+        
+        while (right_s - 1 >=0 && right_t - 1 >=0 && s[right_s - 1] == t[right_t- 1]) {
+            right_s--; 
+            right_t--;
+        }
+        
+        if (s.Length > t.Length) {
+            if (left_t == t.Length - 1 || right_t == 0 || left_t == right_t - 1) 
+                return true;
+        }
+        else if (s.Length < t.Length) {
+            if (left_s == s.Length - 1 || right_s == 0 || left_s == right_s - 1) 
+                return true;
+        }
+        else {
+            if (left_t == t.Length - 2 || right_t == 1 || left_t == right_t - 2) 
+                return true;
+        }
+        return false;        
+    }
+}
+```
