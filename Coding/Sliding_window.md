@@ -318,3 +318,37 @@ public int Minimum_Size_Subarray_Sum(int target, int[] nums)
         return minLen;
     }
 ```
+
+- https://leetcode.com/explore/interview/card/facebook/5/array-and-strings/3017/
+- Given a string <code style="color:red;">s</code> and an integer k, return the length of the longest substring of s that contains at most k distinct characters.
+```cs
+public int LengthOfLongestSubstringKDistinct(string s, int k) {
+        
+        if (s.Length <= k)
+            return s.Length; 
+        
+        if (k ==0)
+            return 0;
+        
+        int n = s.Length, max = 0, left = 0, right =0;
+        var count = new Dictionary<char, int>();
+        //Try to use left and right, and make sure between them has only k characters
+                
+        while (right < n) {
+            var chr = s[right];            
+            
+            count[chr] = count.ContainsKey(chr) ? count[chr] + 1 : 1;
+            
+            while (count.Count > k) {
+                count[s[left]]--; 
+                if (count[s[left]] == 0) {
+                    count.Remove(s[left]);
+                }
+                left++;
+            }          
+            max = Math.Max(max, right - left + 1);            
+            right++;
+        }        
+        return max;
+    }
+```
