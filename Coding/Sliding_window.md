@@ -352,3 +352,25 @@ public int LengthOfLongestSubstringKDistinct(string s, int k) {
         return max;
     }
 ```
+
+- Given a string <span style="color: red;">s</span>, return true if the s can be palindrome after deleting at most one character from it.
+- https://leetcode.com/explore/interview/card/facebook/5/array-and-strings/289/
+```cs
+private Tuple<int,int, bool> Valid(int left, int right, string s) {
+        
+    while (left + 1 < s.Length && right -1 >=0 
+           && s[right - 1] == s[left + 1] 
+           && left + 1 <= right - 1) {
+        right--; 
+        left++; 
+    }        
+    return new Tuple<int,int, bool>(left, right, left == right || left == right -1);
+}
+public bool ValidPalindrome(string s) {
+    var result = Valid(-1, s.Length, s);
+
+    return result.Item3 
+            || Valid(result.Item1 + 1, result.Item2, s).Item3 
+            || Valid(result.Item1, result.Item2 -1, s).Item3;  
+}
+```
