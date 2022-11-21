@@ -36,3 +36,17 @@ public bool HasCycle(ListNode head) {
     return false;
 }
 ```
+- Given the <code>head</code> of a linked list, return the node where the cycle begins. If there is no cycle, return <code>null</code>. 
+```cs
+public ListNode DetectCycle(ListNode head) {
+    var set = new HashSet<ListNode>(); 
+    while (head != null) {
+        if (set.Contains(head)) {
+            return head;
+        }
+        set.Add(head);
+        head = head.next;
+    }
+    return null; 
+}
+```
