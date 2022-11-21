@@ -22,3 +22,17 @@ public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
     return ans;        
 }
 ```
+- https://leetcode.com/problems/linked-list-cycle/description/
+- Given <code>head</code>, the head of a linked list, determine if the linked list has a cycle in it.
+```cs
+public bool HasCycle(ListNode head) {
+    var set = new HashSet<ListNode>(); 
+    while (head != null) {
+        if(!set.Add(head)) {
+            return true;
+        }
+        head = head.next;
+    }
+    return false;
+}
+```
