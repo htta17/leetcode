@@ -50,3 +50,34 @@ public ListNode DetectCycle(ListNode head) {
     return null; 
 }
 ```
+
+```cs
+public void ReorderList(ListNode head) {
+    var nodes = new ListNode[50000];        
+    var count = 0;        
+    var running = head;        
+    while (running != null) {
+        nodes[count] = running; 
+        running = running.next; 
+        count++;
+    }
+    int left = 0, right = count - 1; 
+    running = head; 
+    var isLeftChange = true;
+    while (left < right) {
+        if (isLeftChange) {
+            running.next = nodes[right]; 
+            left++; 
+        } 
+        else {
+            running.next = nodes[left]; 
+            right--; 
+        }
+        running = running.next;    
+        if (left == right) {
+            running.next = null;
+        }
+        isLeftChange = !isLeftChange;
+    } 
+}
+```
