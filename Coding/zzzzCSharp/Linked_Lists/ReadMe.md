@@ -50,6 +50,14 @@ public ListNode DetectCycle(ListNode head) {
     return null; 
 }
 ```
+- You are given the head of a singly linked-list. The list can be represented as: </br>
+<code>
+L0 → L1 → … → Ln - 1 → Ln
+</code></br>
+Reorder the list to be on the following form:</br>
+<code>
+L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 →
+</code> </br> </br>
 
 ```cs
 public void ReorderList(ListNode head) {
