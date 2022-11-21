@@ -41,10 +41,9 @@ public bool HasCycle(ListNode head) {
 public ListNode DetectCycle(ListNode head) {
     var set = new HashSet<ListNode>(); 
     while (head != null) {
-        if (set.Contains(head)) {
+        if (!set.Add(head)) {
             return head;
         }
-        set.Add(head);
         head = head.next;
     }
     return null; 
