@@ -88,3 +88,24 @@ public void ReorderList(ListNode head) {
     } 
 }
 ```
+- https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/description/
+- In a linked list of size n, where n is even, the ith node (0-indexed) of the linked list is known as the twin of the (n-1-i)th node, if 0 <= i <= (n / 2) - 1. <br> 
+The twin sum is defined as the sum of a node and its twin.
+Given the head of a linked list with even length, return the maximum twin sum of the linked list.
+
+```cs
+public int PairSum(ListNode head) {
+    var dic = new Dictionary<int, int>();
+    var index = 0;  
+    while (head != null) {
+        dic[index] = head.val; 
+        index++; 
+        head = head.next;
+    }
+    var ans =0;
+    for (int i=0; i< index / 2; i++) {
+        ans = Math.Max(ans, dic[i] + dic[index - 1 - i]);
+    }
+    return ans;        
+}
+```
