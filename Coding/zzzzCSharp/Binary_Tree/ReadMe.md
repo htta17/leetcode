@@ -2,6 +2,10 @@
 - https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/
 ```cs
 public TreeNode LowestCommonAncestor(TreeNode node, TreeNode p, TreeNode q) {
+      //LCA is a node which:  
+      //   - Itself is p (q), and left node or right node has q (or p)
+      //   - A node which has leftNode is p (q) and rightNode is q (p)
+   
       if (node == null)
           return null; 
       var leftResult = LowestCommonAncestor(node.left, p, q); 
