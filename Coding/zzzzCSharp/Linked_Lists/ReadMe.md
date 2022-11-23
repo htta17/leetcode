@@ -1,4 +1,6 @@
-- https://leetcode.com/explore/interview/card/facebook/6/linked-list/319/
+<details>
+<summary>https://leetcode.com/explore/interview/card/facebook/6/linked-list/319/</summary>
+    
 - You are given two non-empty linked lists representing two non-negative integers. 
 The digits are stored in reverse order, and each of their nodes contains a single digit. 
 Add the two numbers and return the sum as a linked list. <br/>
@@ -22,8 +24,13 @@ public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
     return ans;        
 }
 ```
-- https://leetcode.com/problems/linked-list-cycle/description/
+</details>
+
+<details>
+<summary>https://leetcode.com/problems/linked-list-cycle/description/</summary>
+    
 - Given <code>head</code>, the head of a linked list, determine if the linked list has a cycle in it.
+    
 ```cs
 public bool HasCycle(ListNode head) {
     var set = new HashSet<ListNode>(); 
@@ -36,7 +43,13 @@ public bool HasCycle(ListNode head) {
     return false;
 }
 ```
-- Given the <code>head</code> of a linked list, return the node where the cycle begins. If there is no cycle, return <code>null</code>. 
+</details>
+    
+
+<details>
+<summary>Given the <code>head</code> of a linked list, return the node where the cycle begins. If there is no cycle, return <code>null</code>. 
+    </summary>
+    
 ```cs
 public ListNode DetectCycle(ListNode head) {
     var set = new HashSet<ListNode>(); 
@@ -49,6 +62,10 @@ public ListNode DetectCycle(ListNode head) {
     return null; 
 }
 ```
+</details>
+    
+<details>
+<summary>https://leetcode.com/problems/reorder-list/</summary>
 - You are given the head of a singly linked-list. The list can be represented as: </br>
 <code>
 L0 → L1 → … → Ln - 1 → Ln
@@ -88,7 +105,10 @@ public void ReorderList(ListNode head) {
     } 
 }
 ```
-- https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/description/
+</details>
+<details>
+<summary>https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/description/</summary>
+
 - In a linked list of size n, where n is even, the ith node (0-indexed) of the linked list is known as the twin of the (n-1-i)th node, if 0 <= i <= (n / 2) - 1. <br> 
 The twin sum is defined as the sum of a node and its twin.
 Given the head of a linked list with even length, return the maximum twin sum of the linked list.
@@ -109,3 +129,25 @@ public int PairSum(ListNode head) {
     return ans;        
 }
 ```
+</details>
+
+<details>
+<summary>https://leetcode.com/problems/middle-of-the-linked-list/description/</summary>
+    
+- Given the head of a singly linked list, return the middle node of the linked list. If there are two middle nodes, return the second middle node.
+    
+```cs
+public ListNode MiddleNode(ListNode head) {
+   var index =0; 
+    ListNode node = head; 
+    while (head != null) {            
+        index++; 
+        if (index % 2 == 0) {
+            node = node.next;
+        }
+        head = head.next; 
+    }
+    return node;
+}
+```
+</details>
