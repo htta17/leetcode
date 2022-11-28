@@ -244,3 +244,24 @@ public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
 
 ```
 </details>
+    
+<details>
+<summary>https://leetcode.com/explore/interview/card/microsoft/32/linked-list/212/</summary>    
+    
+```cs
+    public ListNode GetIntersectionNode(ListNode headA, ListNode headB) {        
+        var set = new HashSet<ListNode>(); 
+        while (headA != null) {
+            set.Add(headA);
+            headA = headA.next;
+        }        
+        while (headB != null) {
+            if(set.Contains(headB))
+                return headB;
+            set.Add(headB);
+            headB = headB.next;
+        }
+        return null;
+    }
+```
+</details>
