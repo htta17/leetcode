@@ -182,3 +182,25 @@ public ListNode ReverseList(ListNode head) {
 ```
 
 </details>
+
+<details>
+<summary>Add Two Numbers https://leetcode.com/explore/interview/card/microsoft/32/linked-list/170/</summary>
+    
+```cs
+int memo =0;
+public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
+    var x = (l1 != null ? l1.val : 0) + (l2 != null ? l2.val : 0)  + memo;
+    memo = x /10; 
+    var nodeVal = x % 10;        
+    var ans = new ListNode(nodeVal);         
+
+    if ((l1 == null || l1.next == null) && (l2 == null || l2.next == null) && (memo > 0))
+        ans.next =new ListNode(memo); 
+
+    else if ((l1 != null && l1.next != null) || (l2 != null && l2.next != null))
+        ans.next = AddTwoNumbers(l1 == null ? null : l1.next, l2 ==null ? null : l2.next);        
+
+    return ans;        
+}
+```
+</details>
