@@ -151,3 +151,34 @@ public ListNode MiddleNode(ListNode head) {
 }
 ```
 </details>
+
+<details>
+<summary>https://leetcode.com/explore/interview/card/microsoft/32/linked-list/169/</summary>
+
+- Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+```cs
+//Using stack to store the list, and pop to reverse
+public ListNode ReverseList(ListNode head) {
+    Stack<int> st = new Stack<int>();        
+    if (head == null)
+        return null;        
+    while(head != null) {
+        st.Push(head.val); 
+        head = head.next;
+    }        
+    var newNode = new ListNode();        
+    head = newNode;        
+    while (st.Count > 0) {
+        var val = st.Pop();
+        newNode.val = val; 
+        if (st.Count > 0) {
+            newNode.next = new ListNode();
+            newNode = newNode.next;
+        }
+    }        
+    return head;
+}
+```
+
+</details>
