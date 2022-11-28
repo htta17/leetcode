@@ -204,3 +204,43 @@ public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
 }
 ```
 </details>
+    
+    
+<details>
+<summary>Add Two Numbers II https://leetcode.com/explore/interview/card/microsoft/32/linked-list/205/</summary>
+
+You are given two non-empty linked lists representing two non-negative integers. The most significant digit comes first and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+    
+    
+```cs
+//Use stacks to store lists
+public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
+    var stack1 = new Stack<int>();         
+    while (l1 != null) {
+        stack1.Push(l1.val);
+        l1 = l1.next; 
+    }
+    var stack2 = new Stack<int>(); 
+    while (l2 != null) {
+        stack2.Push(l2.val);
+        l2 = l2.next; 
+    }
+    var memo = 0;
+    ListNode head = null; 
+    while (stack1.Count > 0 || stack2.Count > 0) {
+        var val1 = stack1.Count > 0 ? stack1.Pop() : 0;
+        var val2 = stack2.Count > 0 ? stack2.Pop() : 0;
+        var result = val1 + val2 + memo; 
+        head = new ListNode(result % 10, head);
+        memo = result >= 10 ? 1 : 0;             
+    }
+    if (memo > 0) {
+        head = new ListNode(1, head);
+    }
+    return head;
+}
+
+```
+</details>
