@@ -4,13 +4,11 @@ https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questio
   <summary>https://leetcode.com/problems/product-of-array-except-self/
   </summary>
   
-  You are given an array of strings words. Each element of words consists of two lowercase English letters.
+  Given an integer array <code>nums</code>, return an array answer such that <code>answer[i]</code> <i>is equal to the product of all the elements of</i> <code>nums</code> <i>except</i> <code>nums[i]</code>.
 
-Create the longest possible palindrome by selecting some elements from words and concatenating them in any order. Each element can be selected at most once.
+  The product of any prefix or suffix of nums is guaranteed to fit in a <b>32-bit</b> integer.
 
-Return the length of the longest palindrome that you can create. If it is impossible to create any palindrome, return 0.
-
-A palindrome is a string that reads the same forward and backward.
+You must write an algorithm that runs in O(n) time and without using the division operation.
   
   ```cs 
   public int[] ProductExceptSelf(int[] nums) {
