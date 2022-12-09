@@ -61,3 +61,39 @@ A palindrome is a string that reads the same forward and backward.
 
 
 </details>
+
+<details>
+  <summary>Reverse Words in a String II https://leetcode.com/explore/interview/card/microsoft/30/array-and-strings/213/
+  </summary>
+  
+  ```cs
+  public void ReverseWords(char[] s) {
+      //Reverse whole array 
+      for (int i=0; i< s.Length/2; i++) {
+          var t = s[i]; 
+          s[i] = s[s.Length - 1 - i];
+          s[s.Length - 1 - i] = t;            
+      }
+
+      //Reverse each word
+      int left = 0, right = 0; 
+      while (right <= s.Length) {            
+          if (right == s.Length || s[right] == ' ') {
+              var mid = (right - left) /2;                
+              for (int i=0; i< mid ; i++) {
+                  var t = s[left + i]; 
+                  s[left + i] = s[right - 1 - i]; 
+                  s[right - 1 - i] = t;                    
+              }
+              left = right + 1; 
+              right = left;
+          }
+          else {
+              right++;
+          }
+      }
+  }
+  ```
+  
+ </details>
+
