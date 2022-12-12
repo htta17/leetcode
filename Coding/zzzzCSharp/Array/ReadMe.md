@@ -97,3 +97,34 @@ A palindrome is a string that reads the same forward and backward.
   
  </details>
 
+
+<details>
+  <summary>https://leetcode.com/problems/first-missing-positive/description/
+  </summary>
+
+Given an unsorted integer array nums, return the smallest missing positive integer.
+
+You must implement an algorithm that runs in O(n) time and uses constant extra space.
+
+```cs
+public int FirstMissingPositive(int[] nums) {
+    var set = new HashSet<int>(); 
+    var curr = 1; 
+    for(var i=0; i< nums.Length; i++) {
+        if (set.Contains(nums[i]) || nums[i] <= 0) {            
+            continue;
+        }
+        else {
+            set.Add(nums[i]);
+            if (nums[i] == curr) {
+                while (set.Contains(curr)) {
+                    curr++;
+                }
+            }                
+        }
+    }
+    return curr;
+}
+```
+  
+</details>
