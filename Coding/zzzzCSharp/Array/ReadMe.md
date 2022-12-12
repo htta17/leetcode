@@ -108,16 +108,22 @@ You must implement an algorithm that runs in O(n) time and uses constant extra s
 
 ```cs
 public int FirstMissingPositive(int[] nums) {
-    var set = new HashSet<int>(); 
+    //Concept: There is N numbers, 
+    //The smallest missing number must be from 1 to N + 1
+    //No larger than N + 1
+    var N = nums.Length; 
+    var marked = new bool[nums.Length + 2]; //0 --> N + 1 --> N + 2 items 
     var curr = 1; 
     for(var i=0; i< nums.Length; i++) {
-        if (set.Contains(nums[i]) || nums[i] <= 0) {            
+        if (nums[i] <= 0    //Negative number 
+            || nums[i] > N + 1   //Ignore  
+            || marked[nums[i]]   ) { //Duplicated           
             continue;
         }
         else {
-            set.Add(nums[i]);
+            marked[nums[i]] = true; 
             if (nums[i] == curr) {
-                while (set.Contains(curr)) {
+                while (marked[curr]) {
                     curr++;
                 }
             }                
