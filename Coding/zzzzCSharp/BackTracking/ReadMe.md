@@ -36,6 +36,47 @@ int BackTrack(int row, HashSet<int> cols,  HashSet<int> diag1, HashSet<int> diag
   
   
 </details>
+    
+    
+<details>
+<summary>https://leetcode.com/explore/learn/card/recursion-ii/472/backtracking/2798/</summary>
+    
+Given two integers n and k, return all possible combinations of k numbers chosen from the range [1, n].
+
+You may return the answer in any order.
+```cs
+int n; 
+int k; 
+IList<IList<int>> ans; 
+IList<int> curr; 
+
+public IList<IList<int>> Combine(int n, int k) {
+    this.n = n; 
+    this.k = k;
+    ans = new List<IList<int>>();
+    curr = new List<int>();        
+    Generate(k, 0);        
+    return ans;
+}
+
+void Generate(int k, int index) {
+    if (k == 0) {
+        var cloned = new List<int>(curr);
+        ans.Add(cloned);            
+        return;
+    }
+
+    for (int i=index + 1; i<=n; i++) {            
+        curr.Add(i);
+        Generate(k - 1, i);
+        curr.RemoveAt(curr.Count -1);
+    }        
+}
+```
+  
+  
+</details>
+
 
 
 
