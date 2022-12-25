@@ -37,6 +37,40 @@ int BackTrack(int row, HashSet<int> cols,  HashSet<int> diag1, HashSet<int> diag
   
 </details>
     
+<details>
+<summary>https://leetcode.com/explore/learn/card/recursion-ii/507/beyond-recursion/2903/</summary>
+    
+Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
+
+```cs
+List<IList<int>> answers; 
+public IList<IList<int>> Permute(int[] nums) {
+    answers = new List<IList<int>>(); 
+    var list = nums.ToList();
+    var currList = new List<int>(); 
+    Recur(currList, list);
+    return answers;
+}
+
+void Recur(List<int> currList, List<int> remains) {
+    if (remains.Count == 0) {     
+        answers.Add(new List<int>(currList));
+    }
+    var size = remains.Count; 
+    for (int i=0; i< size; i++) {
+        var x = remains[i]; 
+        currList.Add(x);
+        remains.RemoveAt(i); 
+        Recur(currList, remains);
+        remains.Insert(i, x);   
+        currList.RemoveAt(currList.Count -1);  
+    }
+}   
+```
+  
+  
+</details>
+    
     
 <details>
 <summary>https://leetcode.com/explore/learn/card/recursion-ii/472/backtracking/2798/</summary>
@@ -168,4 +202,6 @@ void Fill(Dictionary<int, HashSet<int>> rows,
   
   
 </details>
+    
+ 
 
