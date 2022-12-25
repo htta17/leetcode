@@ -36,3 +36,95 @@ int BackTrack(int row, HashSet<int> cols,  HashSet<int> diag1, HashSet<int> diag
   
   
 </details>
+
+
+
+<details>
+<summary>https://leetcode.com/explore/learn/card/recursion-ii/472/backtracking/2796/</summary>
+    
+Write a program to solve a Sudoku puzzle by filling the empty cells.
+
+```cs
+char[][] board; 
+List<(int,int)> pairs; //Missing positions need to be filled. 
+public void SolveSudoku(char[][] board) {
+    this.board = board; 
+    //rows[i] to store items can be filled in rows[i]
+    //cols[i] to store items can be filled in cols[i]
+    Dictionary<int, HashSet<int>> rows = new Dictionary<int, HashSet<int>>();
+    Dictionary<int, HashSet<int>> cols = new Dictionary<int, HashSet<int>>();
+    Dictionary<int, HashSet<int>> squares = new Dictionary<int, HashSet<int>>();
+    pairs = new List<(int,int)>();
+    //Setup 
+    for(int i=0; i< 9; i++)  {
+        rows.Add(i, new HashSet<int>());
+        cols.Add(i, new HashSet<int>());
+        squares.Add(i, new HashSet<int>());            
+        for (int j=0; j< 9; j++) {
+            rows[i].Add(j + 1);
+            cols[i].Add(j + 1);
+            squares[i].Add(j + 1);
+            if (board[i][j] == '.') {
+                pairs.Add((i, j));
+            }
+        }            
+        for (int j=0; j< 9; j++) {
+            rows[i].Remove(board[i][j] - '0');
+            cols[i].Remove(board[j][i] - '0');
+        }
+        var _row = i / 3; //0, 1, 2 --> 0. 3, 4, 5 --> 1, ..
+        var _col = i % 3;             
+        for (int k= _row * 3; k < (_row + 1) * 3; k++) {
+            for (int l= _col * 3; l < (_col + 1) * 3; l++) {
+                squares[i].Remove(board[k][l] - '0');
+            }
+        }
+    }
+    var clonedBoard = new char[9][]; 
+    for (int i=0; i<9; i++) {
+        clonedBoard[i] = new char[9]; 
+        for (int j=0; j<9; j++) { 
+            clonedBoard[i][j] = board[i][j];
+        }            
+    }        
+    Fill(rows, cols, squares, clonedBoard);
+}
+
+void Fill(Dictionary<int, HashSet<int>> rows, 
+          Dictionary<int, HashSet<int>> cols, 
+          Dictionary<int, HashSet<int>> squares, 
+          char[][] board) {
+    if (pairs.Count == 0) {  
+        for (int i=0; i<9; i++) {
+            for (int j=0; j<9; j++) {
+                this.board[i][j] = board[i][j];
+            }
+        }            
+        return; 
+    }        
+    var pair = pairs[0]; //Get 1 pair at top
+    int row = pair.Item1, col = pair.Item2; 
+    var clonedItems = new HashSet<int>(rows[row]);        
+    foreach(var item in clonedItems) {
+        //Try to remove
+        var square_index = (row / 3) * 3 + (col / 3); 
+        if (cols[col].Contains(item) && squares[square_index].Contains(item)) {
+            pairs.RemoveAt(0);
+            rows[row].Remove(item);
+            cols[col].Remove(item);
+            squares[square_index].Remove(item);
+            board[row][col] = (char)(item + '0');
+            Fill(rows, cols, squares, board);
+            board[row][col] = '.';
+            squares[square_index].Add(item);
+            cols[col].Add(item);
+            rows[row].Add(item);
+            pairs.Insert(0, pair);
+        }
+    }
+}
+```
+  
+  
+</details>
+
