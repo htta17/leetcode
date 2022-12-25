@@ -38,6 +38,56 @@ int BackTrack(int row, HashSet<int> cols,  HashSet<int> diag1, HashSet<int> diag
 </details>
     
 <details>
+<summary>https://leetcode.com/problems/letter-combinations-of-a-phone-number/</summary>
+    
+Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+
+A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+    
+<img alt="" src="https://assets.leetcode.com/uploads/2022/03/15/1200px-telephone-keypad2svg.png" style="width: 300px; height: 243px;">
+
+```cs
+Dictionary<char, string> dic;    
+    public IList<string> LetterCombinations(string digits) {
+        if (digits == null || digits == "") {
+            return new List<string>();
+        }        
+        dic = new Dictionary<char, string>();        
+        dic.Add('2',"abc");
+        dic.Add('3',"def");
+        dic.Add('4',"ghi");
+        dic.Add('5',"jkl");
+        dic.Add('6',"mno");
+        dic.Add('7',"pqrs");
+        dic.Add('8',"tuv");
+        dic.Add('9',"wxyz");
+        return Recursive(digits);   
+    }
+                
+    IList<string> Recursive(string digit) {        
+        if (digit == "") {
+            return null;
+        }
+        var fistChar = digit[0];        
+        var returnList = new List<string>();         
+        var list = Recursive(digit.Substring(1));         
+        foreach (var chr in dic[fistChar]) {
+            if (list != null) {
+                foreach (var str in list) 
+                    returnList.Add(chr + str);
+            }
+            else 
+                returnList.Add(chr.ToString());
+        }         
+        return returnList; 
+    }
+```
+  
+  
+</details>    
+
+    
+<details>
 <summary>https://leetcode.com/explore/learn/card/recursion-ii/507/beyond-recursion/2903/</summary>
     
 Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
