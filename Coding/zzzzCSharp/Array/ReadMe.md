@@ -134,3 +134,46 @@ public int FirstMissingPositive(int[] nums) {
 ```
   
 </details>
+
+<details>
+  <summary>Subarray Sum Equals K https://leetcode.com/explore/interview/card/bloomberg/68/array-and-strings/2924/</summary>
+  
+  Given an array of integers <code>nums</code> and an integer <code>k</code>, return the total number of subarrays whose sum equals to <code>k</code>.
+
+  A subarray is a contiguous non-empty sequence of elements within an array.
+
+  ```cs
+  public int SubarraySum(int[] nums, int k) {
+        /*O (n^2) for time, O(1) for space*/
+        /*
+        var count = 0; 
+        for (int i=0; i< nums.Length; i++) {
+            var sum =0; 
+            for (int j=i; j< nums.Length; j++) {
+                sum += nums[j];                
+                if (sum == k) {
+                    count++;
+                }
+            }            
+        }
+        return count;
+        */
+        
+        /*Best way*/
+        /*O(n) for time, O(n) for space*/
+        var dic = new Dictionary<int,int>();//store sum & count
+        dic[0] = 1; //Set value
+        var count =0;
+        var sum = 0;
+        for (int i=0; i< nums.Length; i++) {
+            sum += nums[i];            
+            if (dic.ContainsKey(sum - k)) {
+                count += dic[sum -k];
+            }            
+            dic[sum] = dic.ContainsKey(sum) ? dic[sum] + 1 : 1; 
+        }
+        return count;
+    }
+    ```
+  
+</details>  
