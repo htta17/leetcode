@@ -62,3 +62,46 @@ You must write an algorithm that runs in O(n) time and without using the divisio
   ```
   
 </details>
+
+
+<h2>Heap</h2>
+<details>
+<summary>https://leetcode.com/problems/merge-k-sorted-lists/</summary>
+
+You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
+
+Merge all the linked-lists into one sorted linked-list and return it.
+
+```cs
+public ListNode MergeKLists(ListNode[] lists) {  
+        //Convert to List so we can remove when the list (of lists) is null
+        var lList = lists.Where(c => c != null).ToList(); //Remove null list
+        if (lList.Count == 0) {
+            return null;
+        }        
+        var ans = new ListNode(); //Find next Node
+        var fAn = ans; //Final answer
+        while (lList.Count > 0) {
+            var min = int.MaxValue; //Find the smallest value
+            int minNodeIndex = -1;  //Mark the index of the list which has smallest value
+            for(var i=0; i< lList.Count; i++) {
+                if (min > lList[i].val) {
+                    min = lList[i].val; 
+                    minNodeIndex = i;
+                }
+            }
+            lList[minNodeIndex] = lList[minNodeIndex].next; //When found the list, go to next one
+            if (lList[minNodeIndex] == null) { //If this list reach the end, remove the list
+                lList.RemoveAt(minNodeIndex);
+            }
+            ans.val = min;
+            if (lList.Count > 0) {
+                ans.next = new ListNode();
+                ans = ans.next;
+            }
+        }
+        return fAn;  
+    }
+```
+
+</details>
