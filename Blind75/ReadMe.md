@@ -104,6 +104,20 @@ You must write an algorithm that runs in O(n) time and without using the divisio
   <details>
   <summary>https://leetcode.com/problems/maximum-subarray/
   </summary>
+    
+    
+```cs
+public int MaxSubArray(int[] nums) {
+    var max = nums[0]; 
+    var sum = nums[0];
+
+    for (int i=1; i<nums.Length; i++) {
+        sum = Math.Max(sum + nums[i], nums[i]);
+        max = Math.Max(sum, max);
+    }
+    return max;        
+}
+```
 </details>
   
   <details>
