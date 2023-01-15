@@ -105,3 +105,32 @@ public ListNode MergeKLists(ListNode[] lists) {
 ```
 
 </details>
+  
+<details>
+  <summary>https://leetcode.com/problems/top-k-frequent-elements</summary> 
+  
+  Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
+  
+  ```cs
+  public int[] TopKFrequent(int[] nums, int k) {         
+      var dic = new Dictionary<int, int>();
+      //Count the frequency of each elements
+      for (int i=0; i< nums.Length; i++) {
+          dic[nums[i]] = dic.ContainsKey(nums[i]) ? dic[nums[i]] + 1 : 1;
+      }        
+      var queue = new PriorityQueue<int,int>(); 
+      foreach (var key in dic.Keys) {
+          queue.Enqueue(key, -dic[key]);  //Add -dic[key] to order descending (most frequent)
+      }        
+      var ans = new int[k];
+      int j =0; 
+      while (j < k) {            
+          ans[j] = queue.Dequeue(); 
+          j++;
+      }
+      return ans;        
+  }
+  ```
+</details>
+  
+
