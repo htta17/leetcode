@@ -133,4 +133,65 @@ public ListNode MergeKLists(ListNode[] lists) {
   ```
 </details>
   
+<details>
+  <summary>https://leetcode.com/problems/find-median-from-data-stream</summary>
+  
+  ```cs
+  public class MedianFinder {   
+    /*
+    Concept: We use 2 priority queue
+    First one is accending for big number
+    And the other is decending for small number 
+    */
+    PriorityQueue<int,int> bigNumber; 
+    PriorityQueue<int,int> smallNumber; 
+    public MedianFinder() {
+        bigNumber = new PriorityQueue<int,int>();
+        smallNumber = new PriorityQueue<int,int>(Comparer<int>.Create((a,b) => b -a));
+    }
+    
+    public void AddNum(int num) {         
+        if (smallNumber.Count > bigNumber.Count) { //Try to add to bigNumber
+            var biggestOfSmall = smallNumber.Peek(); 
+            if (biggestOfSmall <= num) {   //Can add directly to big list
+                bigNumber.Enqueue(num, num);
+            }
+            else {   
+                //Need to move biggest element in small queue to big list, 
+                //because new element is belong to small list
+                smallNumber.Dequeue();
+                smallNumber.Enqueue(num, num);
+                bigNumber.Enqueue(biggestOfSmall, biggestOfSmall);
+            }
+        }
+        else { //Add to smallNumber
+            if (smallNumber.Count == 0) {
+                smallNumber.Enqueue(num, num);
+            }
+            else {
+                var smallestOfBig = bigNumber.Peek(); 
+                if (smallestOfBig < num) {
+                    bigNumber.Dequeue(); 
+                    bigNumber.Enqueue(num, num);
+                    smallNumber.Enqueue(smallestOfBig, smallestOfBig);
+                }
+                else {
+                    smallNumber.Enqueue(num, num);
+                }
+            }
+        }        
+    }
+    
+    public double FindMedian() {
+        if (smallNumber.Count > bigNumber.Count) {
+            return smallNumber.Peek() * 1.0;
+        }
+        else {
+            return (smallNumber.Peek() + bigNumber.Peek()) / 2.0; 
+        }
+    }
+}
+  ```
+  </details>
+  
 
