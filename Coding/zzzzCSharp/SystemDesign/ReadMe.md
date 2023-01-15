@@ -85,3 +85,41 @@
   ```
  
  </details>
+   
+ <details>
+   <summary>Insert Delete GetRandom O(1) https://leetcode.com/explore/interview/card/google/65/design-4/3094/</summary>
+
+   ```cs
+   public class RandomizedSet {
+    HashSet<int> set; //O(1)
+    List<int> list; 
+    public RandomizedSet() {
+        set = new HashSet<int>();        
+        list = new List<int>();
+    }
+    
+    public bool Insert(int val) {
+        var ans = set.Add(val);
+        if (ans) {
+            list.Add(val);
+        }
+        return ans;
+    }
+    
+    public bool Remove(int val) {
+        var ans =  set.Remove(val);
+        if (ans) {
+            list.Remove(val);
+        }
+        return ans;
+    }
+    
+    public int GetRandom() {
+        var rand = new Random();
+        var next = rand.Next(set.Count) ;
+        return list[next]; //List can use for random
+    }
+}
+
+```
+   </details>
