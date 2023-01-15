@@ -31,8 +31,44 @@ You can return the answer in any order.
  ```
   
 </details>
-
+  
 <details>
+  <summary> https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+  </summary>
+  
+  ```cs
+  public int MaxProfit(int[] prices) {        
+    var maxProfit =0;         
+    var minPrice = prices[0];         
+    for (var i=1; i < prices.Length; i++){
+        minPrice = Math.Min(minPrice, prices[i]);            
+        maxProfit = Math.Max(maxProfit, prices[i] - minPrice);            
+    }        
+    return maxProfit;
+}
+  ```
+</details>
+  
+<details>
+  <summary>https://leetcode.com/problems/contains-duplicate/  </summary>
+  
+  ```cs
+  public bool ContainsDuplicate(int[] nums) {
+        var dic = new Dictionary<int, int>(); 
+        for (int i=0; i< nums.Length; i++) {
+            if(!dic.ContainsKey(nums[i])) {
+                dic.Add(nums[i],i); 
+            }
+            else {
+                return true;
+            }
+        }
+        return false; 
+    }
+  ```
+</details>
+  
+  <details>
   <summary>https://leetcode.com/problems/product-of-array-except-self/
   </summary>
   
@@ -64,6 +100,45 @@ You must write an algorithm that runs in O(n) time and without using the divisio
   ```
   
 </details>
+  
+  <details>
+  <summary>https://leetcode.com/problems/maximum-subarray/
+  </summary>
+</details>
+  
+  <details>
+  <summary>https://leetcode.com/problems/maximum-product-subarray/
+  </summary>
+</details>
+  
+  <details>
+  <summary>https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+  </summary>
+</details>
+  
+  
+  <details>
+  <summary>https://leetcode.com/problems/search-in-rotated-sorted-array/
+  </summary>
+</details>
+  
+  <details>
+  <summary>
+  </summary>
+</details>
+  
+  <details>
+  <summary>
+  </summary>
+</details>
+  
+  <details>
+  <summary>
+  </summary>
+</details>
+  
+
+
 
 
 <h2>Heap</h2>
