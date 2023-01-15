@@ -46,3 +46,42 @@
   ```
   
  </details>
+ 
+ <details>
+  <summary>Min Stack: https://leetcode.com/explore/interview/card/google/65/design-4/3091/</summary>
+  
+  ```cs
+  public class MinStack {
+    Stack<int[]> stack; //Each item, we store both min & value    
+    public MinStack() {
+        stack = new Stack<int[]>();
+    }
+    
+    public void Push(int val) {
+        if (stack.Count == 0) {
+            stack.Push(new int[]{ val, val});            
+        }
+        else {
+            //Find the current min & value
+            var curr = stack.Peek(); 
+            var min = Math.Min(curr[1], val);
+            //Store value & min
+            stack.Push(new int[]{val, min});
+        }
+    }
+    
+    public void Pop() { 
+        stack.Pop();
+    }
+    
+    public int Top() {
+        return stack.Peek()[0];
+    }
+    
+    public int GetMin() {
+       return stack.Peek()[1];
+    }
+}
+  ```
+ 
+ </details>
