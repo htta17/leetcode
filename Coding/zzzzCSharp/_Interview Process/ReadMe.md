@@ -58,3 +58,64 @@ public string LicenseKeyFormatting(string s, int k) {
   ```
   
 </details>
+
+<details>
+<summary>Extra long factorials: https://www.hackerrank.com/challenges/extra-long-factorials</summary>
+
+```cs
+public static string multiply1Digit(string s, int digit) {
+        var ans = "";
+        var memo =0;  
+        for (int i=s.Length-1; i>=0; i--) {            
+            var num = s[i] - '0'; 
+            var result = num * digit + memo; 
+            memo = result / 10; 
+            ans = (result % 10).ToString() + ans;
+        }
+        if (memo > 0) {
+            ans = memo.ToString() + ans;
+        }
+        return ans;
+    }
+    
+    public static string plus2Strings(string a, string b) {
+        while (a.Length < b.Length) a = "0" + a; 
+        while (a.Length > b.Length) b = "0" + b; 
+        var ans = ""; 
+        var memo = 0; 
+        
+        for (int i=a.Length - 1; i>=0; i--) {
+            var result = a[i] - '0' + b[i] - '0' + memo; 
+            memo = result / 10; 
+            ans = (result % 10).ToString() + ans;
+        }        
+        if (memo > 0) {
+            ans = memo.ToString() + ans;
+        }
+        return ans;
+    }
+
+    public static void extraLongFactorials(int n)
+    {
+        var ans = "1"; 
+        for (int i=2; i<=n; i++) {
+            if (i < 10) {
+                ans = multiply1Digit(ans, i);
+            }
+            else if (i >=10 && i <= 99) {
+                var r1 = multiply1Digit(ans, i / 10) + "0" ;
+                var r2 = multiply1Digit(ans, i % 10) ;
+                ans = plus2Strings(r1, r2);
+            }
+            else if (i >= 100 && i <= 999) {
+                var r1 = multiply1Digit(ans, i / 100) + "00" ;
+                var r2 = multiply1Digit(ans, (i % 100)/10) + "0";
+                var r3 = multiply1Digit(ans, i % 10) ;
+                ans = plus2Strings(plus2Strings(r1, r2), r3);
+            }
+        }
+        Console.WriteLine(ans);
+    }
+```
+
+</details>
