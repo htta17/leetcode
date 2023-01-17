@@ -119,3 +119,28 @@ public static string multiply1Digit(string s, int digit) {
 ```
 
 </details>
+
+<details>
+<summary>Isomorphic Strings: https://leetcode.com/explore/interview/card/google/66/others-4/3098/</summary>
+
+
+```cs
+public bool IsIsomorphic(string s, string t) {
+    var mapS = new Dictionary<char,char>();        
+    var mapT = new Dictionary<char,char>();        
+    for (int i=0; i< s.Length; i++) {
+        if (!mapS.ContainsKey(s[i]) &&  !mapT.ContainsKey(t[i])) {
+            mapS[s[i]] = t[i];
+            mapT[t[i]] = s[i];
+        }
+        else if (!mapS.ContainsKey(s[i]) ||  !mapT.ContainsKey(t[i])) {
+            return false;
+        }
+        else if (mapS[s[i]] != t[i] || mapT[t[i]] != s[i]) {
+            return false;
+        }            
+    }
+    return true;
+}
+```
+</details>
