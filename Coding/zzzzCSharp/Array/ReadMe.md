@@ -174,6 +174,35 @@ public int FirstMissingPositive(int[] nums) {
         }
         return count;
     }
-    ```
-  
+```  
 </details>  
+
+
+<details>
+<summary>Longest Substring with At Most Two Distinct Characters https://leetcode.com/explore/interview/card/google/59/array-and-strings/3054/</summary>
+
+Given a string s, return the length of the longest substring that contains at most two distinct characters.
+
+```cs
+public int LengthOfLongestSubstringTwoDistinct(string s) {
+    int ans =0, left = 0, right =0;
+    var dic = new Dictionary<char, int>(); //Save last character position
+                                            //make sure dic always contains 2 items
+                                            //If there is a new characters, try to remove item 
+                                            //with smaller value
+    while (right < s.Length) {
+        var c = s[right];             
+        if (!dic.ContainsKey(c) && dic.Count >= 2) { 
+            var keys = dic.Keys.ToList();
+            var removedKey = dic[keys[0]] < dic[keys[1]] ? keys[0] : keys[1];
+            left = dic[removedKey] + 1; 
+            dic.Remove(removedKey);                    
+        }
+        dic[c] = right;
+        ans = Math.Max(ans, right - left + 1);            
+        right++;
+    }        
+    return ans;
+}
+```
+</details>
