@@ -206,3 +206,42 @@ public int LengthOfLongestSubstringTwoDistinct(string s) {
 }
 ```
 </details>
+  
+<details>
+  <summary>  Missing Ranges: https://leetcode.com/explore/interview/card/google/59/array-and-strings/3055/</summary>
+  
+  ```cs
+  string Range(int left, int right) {
+        if (left < right) 
+            return $"{left}->{right}";
+        else if (left == right)
+            return $"{left}";
+        else 
+            return "";
+    }
+    public IList<string> FindMissingRanges(int[] nums, int lower, int upper) {
+        var ans = new List<string>();         
+        if (nums.Length == 0) {
+            var s1 = Range(lower, upper);
+            if (s1 != "")
+                ans.Add(s1);
+            return ans;
+        }        
+        //Add from lower to nums[0]
+        var s = Range(lower, nums[0] - 1);
+        if (s != "")
+            ans.Add(s);        
+        //Add from nums[0] to nums[ n - 1]
+        for (int i=0; i< nums.Length - 1; i++) {
+            s = Range(nums[i] + 1, nums[i +1] - 1);
+            if (s != "")
+                ans.Add(s);
+        }        
+        //Add from nums[n-1] to upper
+        s = Range(nums[nums.Length - 1] + 1, upper);
+        if (s != "")
+                ans.Add(s);
+        return ans; 
+    }
+  ```
+</details>
