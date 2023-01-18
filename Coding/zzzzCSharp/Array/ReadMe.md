@@ -245,3 +245,34 @@ public int LengthOfLongestSubstringTwoDistinct(string s) {
     }
   ```
 </details>
+
+  
+  <details>
+    <summary>Valid Parentheses: https://leetcode.com/explore/interview/card/google/59/array-and-strings/467/ </summary>
+    
+    
+```cs
+public bool IsValid(string s) {
+    //Time: O(n). 
+    //Space: O(n)
+    var stack = new Stack<char>(); 
+    foreach(var c in s) {
+        if (c == '(' || c == '[' || c == '{') {
+            stack.Push(c);
+        }
+        else { //Close } ) ]
+            if (stack.Count == 0) {
+                return false; 
+            }
+            else {
+                var open = stack.Pop();
+                if ((open == '[' && c != ']') || (open == '{' && c != '}') 
+                    || (open == '(' && c != ')'))                      
+                    return false;
+            }
+        }
+    }
+    return stack.Count == 0;
+}
+```
+  </details>
