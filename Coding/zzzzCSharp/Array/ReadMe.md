@@ -302,7 +302,7 @@ public int MaxDistToClosest(int[] seats) {
     }
     max = Math.Max(max, seats.Length - right -1);      
     //Find the max between 2 nearest 1
-    var index = 0;
+    var index = left + 1;
     while (index < right) {
         index = left + 1;              
         while (seats[index] == 0) 
