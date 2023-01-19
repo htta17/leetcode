@@ -276,3 +276,41 @@ public bool IsValid(string s) {
 }
 ```
   </details>
+    
+    
+<details>
+  <summary>Maximize Distance to Closest Person: https://leetcode.com/explore/interview/card/google/59/array-and-strings/3058/</summary>
+  
+  
+```cs
+public int MaxDistToClosest(int[] seats) {
+    //Find the max distance betwwen 2 existing persons
+    //The distant between Alex to close person is = maxDistance / 2
+    //For example: Distant is 5 --> max = 2
+    //And need to take the left or right as well 
+    // Something like this: 0 0 0 1 0 0 --> solve below
+    var max = 0;        
+    int left = 0;
+    while (left < seats.Length && seats[left] == 0) {
+        left++;
+    }        
+    max = Math.Max(max, left);
+    //// Something like this: 0 1 0 0 0 0--> solve below
+    int right = seats.Length - 1; 
+    while (right >=0 && seats[right] == 0) {
+        right--; 
+    }
+    max = Math.Max(max, seats.Length - right -1);      
+    //Find the max between 2 nearest 1
+    var index = 0;
+    while (index < right) {
+        index = left + 1;              
+        while (seats[index] == 0) 
+            index++;
+        max = Math.Max(max, (index - left) / 2);            
+        left = index;            
+    }        
+    return max;
+}
+```
+</details>
