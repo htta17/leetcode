@@ -120,3 +120,34 @@ public class Solution {
 ```
 </details>
 
+  <details>
+    <summary>String Transforms Into Another String: https://leetcode.com/problems/string-transforms-into-another-string</summary>
+    
+ ```cs
+ public bool CanConvert(string str1, string str2) {
+    if(str1 == str2) {
+        return true;
+    }
+    var n = str1.Length;
+    //We need a dictionary to store mapping 
+    //For exampe: aabcc & ccdee, we build a dictionary like: 
+    //dic[a] = c, dic[b] = d, dic[c] = e.
+    //For the loop like: abc & bca, we need a temporary value, like: 
+    //b-->temp, a-->b, c-->a, temp --> c
+    //Therefore, we need a space in values
+    var dic = new Dictionary<char,char>(); 
+    for (int i=0; i< n; i++) {
+        var original = str1[i]; 
+        var target = str2[i];            
+        if (!dic.ContainsKey(original)) {
+            dic[original] = target; //Create new conversion from [original] to [target]
+        }
+        else if (dic[original] != target) { //There is a conflict
+            return false;
+        }            
+    }
+    var valuesSet = new HashSet<char>(dic.Values);
+    return valuesSet.Count < 26;        
+}
+ ```
+  </details>
