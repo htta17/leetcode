@@ -99,7 +99,7 @@ A palindrome is a string that reads the same forward and backward.
 
 
 <details>
-  <summary>https://leetcode.com/problems/first-missing-positive/description/
+  <summary>First Missing Positive https://leetcode.com/problems/first-missing-positive/description/
   </summary>
 
 Given an unsorted integer array nums, return the smallest missing positive integer.
@@ -368,7 +368,7 @@ public string NextClosestTime(string time) {
 </details>
   
   <details>
-    <summary>https://leetcode.com/explore/interview/card/google/59/array-and-strings/3056/</summary>
+    <summary>Expressive Words: https://leetcode.com/explore/interview/card/google/59/array-and-strings/3056/</summary>
     
 ```cs
   public class Solution {
