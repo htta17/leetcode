@@ -366,3 +366,46 @@ public string NextClosestTime(string time) {
 ```
 
 </details>
+  
+  <details>
+    <summary>https://leetcode.com/explore/interview/card/google/59/array-and-strings/3056/</summary>
+    
+```cs
+  public class Solution {
+    bool Compare(string s, string word) {
+        int index_S = 0;
+        int index_W = 0;         
+        while (index_S  < s.Length && index_W  < word.Length) {
+            if (s[index_S] != word[index_W]) //Different character
+                return false;             
+            var countS = 1;
+            while (index_S + 1 < s.Length && s[index_S] == s[index_S + 1]) {
+                index_S++; 
+                countS++;
+            }            
+            var countW = 1;
+            while (index_W + 1 < word.Length && word[index_W] == word[index_W + 1]) {
+                index_W++; 
+                countW++; 
+            }
+            //2 cases cannot be converted: 
+            //s=hello (2 L) and word = helo (1 L), 1 L cannot repeat to 2 L
+            //s=hello (2 L) and word = helllo (2 L) 
+            if ((countS == 2 && countW == 1) || (countS < countW)) {
+                return false;
+            }            
+            //Increase as regular
+            index_S++; 
+            index_W++;            
+        }
+        return (index_S  == s.Length && index_W  == word.Length); //One of those not finish           
+    }
+    public int ExpressiveWords(string s, string[] words) {        
+        var ans = 0; 
+        foreach(var word in words) 
+            if (Compare(s, word)) ans ++;
+        return ans;       
+    }
+}
+```
+  </details>
