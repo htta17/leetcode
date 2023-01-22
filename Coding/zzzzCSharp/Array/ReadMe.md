@@ -314,3 +314,55 @@ public int MaxDistToClosest(int[] seats) {
 }
 ```
 </details>
+
+
+<details>
+<summary>Next Closest Time: https://leetcode.com/explore/interview/card/google/59/array-and-strings/471/</summary>
+
+```cs
+public string NextClosestTime(string time) {
+        var values = time.Split(':');
+        var currentHour = int.Parse(values[0]);
+        var currentTime = int.Parse(values[1]);
+        var posChar = new char[4] {values[0][0], values[0][1], values[1][0], values[1][1]}; 
+        var set = new HashSet<int>(); 
+        //All possible value 
+        for (int i=0; i<4; i++) {
+            for (int j =0; j<4; j++) {
+                var val = (posChar[i] - '0') * 10 + posChar[j] - '0'; 
+                set.Add(val);
+            }
+        }
+        
+        //Order: minTime < ... (Other values) < currentTime < greaterCurrentMin < ... (Other values) < 59
+        var minTime = 60;  
+        var greaterCurrentMin = 60; 
+        
+        //Order: minHour < ... (Other values) < currentHour < greaterCurrentHour < ... (Other values) < 24
+        var minHour = 24; 
+        var greaterCurrentHour = 24; 
+        
+        foreach(var item in set) {     
+            if (item < 60) {
+                minTime = Math.Min(minTime, item);
+                if (item > currentTime && greaterCurrentMin > item) {
+                    greaterCurrentMin = item;
+                }
+            }
+            if (item < 24) {
+                minHour = Math.Min(minHour, item);
+                if (item > currentHour && greaterCurrentHour > item) {
+                    greaterCurrentHour = item;
+                }
+            }
+        }
+        
+        return string.Format("{0:d2}:{1:d2}", 
+                                greaterCurrentMin < 60 ? currentHour 
+                                : greaterCurrentHour < 24 ? greaterCurrentHour 
+                                : minHour, 
+                                greaterCurrentMin < 60 ? greaterCurrentMin : minTime);
+    }
+```
+
+</details>
