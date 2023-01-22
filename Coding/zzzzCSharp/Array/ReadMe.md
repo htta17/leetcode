@@ -437,3 +437,46 @@ public string NextClosestTime(string time) {
     }
   ```
 </details>
+    
+    
+<details>
+  <summary>Find And Replace in String: https://leetcode.com/explore/interview/card/google/59/array-and-strings/3057/</summary>
+  
+```cs
+  public string FindReplaceString(string s, int[] indices, string[] sources, string[] targets) {
+        var queue = new PriorityQueue<int, int>();        
+        for (int i=0; i< indices.Length; i++) {
+            queue.Enqueue(i, indices[i]);
+        }        
+        string ans = "";
+        int indexOfS = 0;         
+        for (int i=0; i< indices.Length; i++) {
+            var _index = queue.Dequeue(); 
+            if (indexOfS < indices[_index]) {
+                //Append ans with substring from indexOfS to indices[i] ([indices[i] - indexOfS] characters)
+                ans += s.Substring(indexOfS, indices[_index] - indexOfS);
+                //Set indexOfS = indices[i]
+                indexOfS = indices[_index];
+            }            
+            if (indexOfS + sources[_index].Length <= s.Length) {
+                //Take sources[i].Length characters
+                var replacingText = s.Substring(indexOfS, sources[_index].Length); 
+                
+                if (replacingText == sources[_index]){ //If this text can be replaced
+                    ans += targets[_index];       
+                }
+                else {
+                    ans += replacingText;
+                }
+                //Update indexOfS            
+                indexOfS = indexOfS + replacingText.Length;
+            }
+        }
+        //Append the rest of string
+        if (indexOfS < s.Length ) {
+            ans += s.Substring(indexOfS);
+        }
+        return ans; 
+    }
+```
+ </details>
