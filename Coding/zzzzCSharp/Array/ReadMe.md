@@ -409,3 +409,31 @@ public string NextClosestTime(string time) {
 }
 ```
   </details>
+    
+    
+<details>
+  <summary>Container With Most Water: https://leetcode.com/explore/interview/card/google/59/array-and-strings/3048/</summary>
+  
+  ```cs
+  public int MaxArea(int[] height) {
+        int maxArea = 0;
+        //Concept: 
+        //The current area = min(height[left], height[right]) * (right - left), 
+        //  which left and right 2 "walls" for the water 
+        //The area will be bigger than current when min(height[left], height[right]) inscrease.
+        int left = 0; 
+        int right = height.Length - 1;
+        while(left < right) {
+            var currentArea = Math.Min(height[left], height[right]) * (right - left);
+            maxArea = Math.Max(maxArea, currentArea);            
+            if (height[left] < height[right]) {
+                left++; 
+            }
+            else {
+                right--;
+            }
+        }
+        return maxArea; 
+    }
+  ```
+</details>
