@@ -603,3 +603,26 @@ public class Solution {
   ```
   
   </details>
+<details>
+  <summary>Search Insert Position: https://leetcode.com/problems/search-insert-position</summary>
+  
+  ```cs
+  public int SearchInsert(int[] nums, int target) {
+        if (target <= nums[0])
+            return 0;
+        else if(target > nums[nums.Length -1])
+            return nums.Length ;
+        int left = 0, right = nums.Length -1;
+        var mid = (left + right) / 2;  
+        while (nums[mid] != target && left < right -1) {
+            if (nums[mid] < target) 
+                left = mid;
+            else
+                right = mid;
+            mid = (left + right) / 2;  
+        } 
+        return nums[mid] == target ? mid : right; 
+    }
+  ```
+  
+  </details>
