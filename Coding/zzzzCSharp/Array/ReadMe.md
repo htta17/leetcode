@@ -480,3 +480,75 @@ public string NextClosestTime(string time) {
     }
 ```
  </details>
+  
+<details>
+  <summary>Multiply Strings: https://leetcode.com/explore/interview/card/google/59/array-and-strings/3051/</summary>
+  
+```cs
+public class Solution {
+    public string Multiply(string num1, string num2) {
+        if (num1 == "0" || num2 == "0") {
+            return "0"; 
+        }        
+        var result = "0";         
+        var zeroAppend = 0;         
+        for (int i= num2.Length -1 ; i>=0; i--) {
+            var tmp = Multiply(num1, num2[i]);             
+            for (int j=0; j<zeroAppend; j++)
+                tmp += "0";            
+            result = Plus(result, tmp);            
+            zeroAppend++; 
+        }        
+        return result;
+    }
+    //Multiple a number with a character
+    public string Multiply(string num, char c) {        
+        var num2 = c - '0';         
+        if (num2 == 0) 
+            return "0";        
+        var memo = 0;         
+        var s = "";
+        
+        for (int len = num.Length - 1; len >=0; len --) {
+            var result = (num[len] - '0') * num2 + memo; 
+            if (result >= 10) {                
+                memo = result / 10; 
+                result = result % 10; 
+            }
+            else {
+                memo = 0;
+            }            
+            s = result.ToString() + s;
+        }        
+        if (memo > 0) {
+            s = memo.ToString() + s;
+        }
+        return s; 
+    }
+    
+    string Plus(string num1, string num2) {   
+        while (num1.Length < num2.Length)  num1 = "0" + num1;
+        while (num2.Length < num1.Length)  num2 = "0" + num2;
+        var memo = 0;         
+        string s = "";        
+        for (int i=num1.Length -1; i>=0; i--){
+            var sum = (num1[i] - '0') + (num2[i] - '0') + memo; 
+            if (sum >=  10) {
+                memo = 1; 
+                sum = sum - 10; 
+            }
+            else {
+                memo = 0;
+            }            
+            s = sum.ToString() + s;             
+        }        
+        if (memo > 0) {
+            s = memo.ToString() + s;
+        }         
+        return s;
+    } 
+}
+```
+  
+  
+</details>
