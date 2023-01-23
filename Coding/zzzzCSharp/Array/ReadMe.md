@@ -626,3 +626,40 @@ public class Solution {
   ```
   
   </details>
+  
+<details>
+  <summary>Valid Sudoku: https://leetcode.com/problems/valid-sudoku</summary>  
+  
+  ```cs
+  public bool IsValidSudoku(char[][] board) {
+        HashSet<char> rowSet; 
+        HashSet<char> colSet;
+        HashSet<char> sqSet;        
+        for (int i=0; i<9; i++) {
+            rowSet =  new HashSet<char>();
+            colSet= new HashSet<char>(); 
+            //Check row and column
+            for (int j=0; j<9; j++) {                
+                if (board[i][j] != '.' && !rowSet.Add(board[i][j]))  {   //If row has a number but the set already has it                
+                    return false; 
+                } 
+                if (board[j][i] != '.' && !colSet.Add(board[j][i]))  {  //If row has a number but the set already has it
+                    return false; 
+                } 
+            }
+        }        
+        //Check square
+        for (int i=0; i<9; i=i+3) {
+            for (int j=0; j<9; j=j+3) {
+                sqSet = new HashSet<char>();                
+                for (int x=i; x< i+3; x++) 
+                for (int y=j; y< j+3; y++)    
+                    if (board[x][y] != '.' && !sqSet.Add(board[x][y]) )
+                        return false; 
+                 
+            }
+        }  
+        return true;
+    }
+  ```
+ </details>
