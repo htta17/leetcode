@@ -552,3 +552,54 @@ public class Solution {
   
   
 </details>
+  
+<details>
+  <summary>Next Permutation: https://leetcode.com/explore/interview/card/google/59/array-and-strings/3050/</summary>
+  
+  ```cs
+ public void NextPermutation(int[] nums) {
+    //Run from N-1 to 0 
+    //Find a place POS which has nums[POS -1] < nums[POS] --> POS - 1 is the position need to be swapped
+    //From POS to N - 1, find the smallest number which larger than nums[POS - 1], 
+    //let say this number in NEWPOS
+    //Put replace nums[POS-1] by nums[NEWPOS]
+    //For the rest, reorder 
+    //Example: 9 8 5 8 7 2. 
+    //      --> 5 is the number need to be replaced 
+    //      --> 7 is the smallest number which is used to replace 5
+    //      --> 9 8 7.....
+    //For the rest, reoder ascending
+    //      --> 9 8 7 2 5 8
+    int index = nums.Length -1; 
+    while (index > 0 && nums[index -1] >= nums[index] ) {
+        index--;
+    }
+    index--;        
+    if (index >= 0) {
+        //Find a smallest numbers which greater than nums[index]
+        var smallest = 101; 
+        var swapIndex = -1; 
+        for (int i = index + 1; i < nums.Length; i++) {
+            if (nums[i] > nums[index] && smallest >= nums[i]) {
+                smallest = nums[i];
+                swapIndex = i; 
+            }
+        }
+        if (swapIndex > -1) {
+            nums[swapIndex] = nums[index];
+            nums[index] = smallest;                  
+        }            
+    }        
+    var left = index + 1; 
+    var right = nums.Length -1; 
+    while (left < right) {
+        var temp = nums[left]; 
+        nums[left] = nums[right]; 
+        nums[right] = temp; 
+        left++; 
+        right--;
+    }     
+}
+  ```
+  
+  </details>
