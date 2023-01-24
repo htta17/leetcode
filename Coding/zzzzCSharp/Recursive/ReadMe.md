@@ -23,3 +23,30 @@ public string CountAndSay(int n) {
  ```
   </details>
   
+  
+  <details>
+  <summary>Sqrt(x): https://leetcode.com/problems/sqrtx</summary>
+  
+  ```cs
+  public int MySqrt(int x) {        
+        if (x <= 1)
+            return x;
+        var left = 1; 
+        var right = 65536;
+        while (left < right -1) {
+            var mid = (left + right) /2; 
+            long midS =(long) mid *(long) mid;             
+            if (midS == x) {
+                return mid; 
+            }
+            else if (midS > x) {
+                right = mid; 
+            }
+            else {
+                left = mid; 
+            }
+        } 
+        return left;         
+    }
+  ```
+    </details>
