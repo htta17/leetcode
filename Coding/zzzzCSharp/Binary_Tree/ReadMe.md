@@ -25,3 +25,19 @@ public TreeNode LowestCommonAncestor(TreeNode node, TreeNode p, TreeNode q) {
   }
 ```
 </details>
+
+<details>
+      <summary>Flip Equivalent Binary Trees: https://leetcode.com/explore/interview/card/google/61/trees-and-graphs/3077/ </summary> 
+
+```cs
+public bool FlipEquiv(TreeNode root1, TreeNode root2) {
+  if (root1 == null && root2 == null)
+      return true;
+  else if (root1 == null || root2 == null)
+      return false;
+  return root1.val == root2.val && 
+          ((FlipEquiv(root1.left, root2.left) && FlipEquiv(root1.right, root2.right))
+          || (FlipEquiv(root1.left, root2.right) && FlipEquiv(root1.right, root2.left)));
+}
+```
+</details>
