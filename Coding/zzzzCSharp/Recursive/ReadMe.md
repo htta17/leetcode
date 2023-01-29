@@ -49,4 +49,42 @@ public string CountAndSay(int n) {
         return left;         
     }
   ```
-    </details>
+</details>
+
+<details>
+<summary>Strobogrammatic Number II: https://leetcode.com/explore/interview/card/google/62/recursion-4/399/</summary>
+    
+```cs
+public class Solution {
+Dictionary<int, int> dic = new  Dictionary<int, int>() {
+    {0, 0}, {1, 1}, {6, 9}, {8, 8}, {9, 6}        
+};     
+int n;     
+IList<string> Strobogrammatic(int k) {
+    var ans = new List<string>(); 
+    if (k == 0) {
+        ans.Add("");
+        return ans;
+    }
+    else if (k == 1) {
+        foreach (var key in dic.Keys) 
+            if (key == dic[key]) 
+                ans.Add(key.ToString());                
+        return ans;
+    } 
+    else {
+        var prvResult = Strobogrammatic(k-2); 
+        foreach (var result in prvResult) 
+            foreach(var key in dic.Keys)
+                if (k != n || (key > 0)) 
+                    ans.Add(string.Format("{0}{1}{2}", key, result, dic[key]));                    
+        return ans;
+    }
+}    
+public IList<string> FindStrobogrammatic(int n) {
+    this.n = n; 
+    return Strobogrammatic(n);
+}
+}
+```
+</details>
