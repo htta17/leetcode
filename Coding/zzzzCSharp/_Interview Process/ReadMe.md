@@ -144,3 +144,38 @@ public bool IsIsomorphic(string s, string t) {
 }
 ```
 </details>
+
+<details>
+  <summary>Strobogrammatic Number: https://leetcode.com/explore/interview/card/google/66/others-4/3099/</summary>
+
+```cs
+Dictionary<char,char> dic = new Dictionary<char,char>
+    {
+        {'0', '0'},
+        {'1', '1'},
+        {'8', '8'},
+        {'6', '9'},        
+        {'9', '6'} 
+    }; 
+    public bool IsStrobogrammatic(string num) {
+        var n = num.Length;
+        var ans = true; 
+        if (n % 2 == 1) { //
+            var middleChar =  num[n / 2]; 
+            ans =  middleChar == '0' ||  middleChar == '8' || middleChar == '1'; 
+        }
+        if (n > 1) {
+            ans = ans && dic.ContainsKey(num[0]) 
+                    && dic[num[0]] == num[num.Length - 1]
+                    && (num[0] - '0' > 0); 
+            for (int i=1; i< n/2; i++) {
+                ans = ans && dic.ContainsKey(num[i])
+                          && dic[num[i]] == num[num.Length - 1 - i]; 
+            }            
+        }        
+        return ans;
+    }
+
+```
+
+</details>
