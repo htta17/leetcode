@@ -60,3 +60,53 @@
   ```
   
 </details>
+
+<details>
+  <summary>Word Ladder: https://leetcode.com/explore/interview/card/google/61/trees-and-graphs/3068/</summary>
+  
+  ```cs
+  public class Solution {
+    HashSet<string> wordSet; //Set of 
+    public int LadderLength(string beginWord, string endWord, IList<string> wordList) {
+        wordSet = new HashSet<string>(wordList);        
+        var queue = new Queue<string>(); 
+        queue.Enqueue(beginWord);
+        wordSet.Remove(beginWord);
+        var count = 0;        
+        while(queue.Count > 0) {
+            var size = queue.Count; 
+            count++; 
+            for (int i=0; i< size; i++) {
+                var word = queue.Dequeue(); 
+                var neighbors = GetWordNeighbor(word);
+                foreach(var neighbor in neighbors) {
+                    wordSet.Remove(neighbor);
+                    if (neighbor == endWord) 
+                        return count + 1;
+                    else 
+                        queue.Enqueue(neighbor);
+                }                
+            }
+        }
+        return 0;
+    }
+    List<string> GetWordNeighbor(string word) {
+        var ans = new List<string>();
+        //Go to each character of word and try to replace 
+        for (var i=0; i< word.Length; i++) {
+            for (int j=0; j< 26; j++) {
+                var newChar = (char)('a' + j);
+                if (newChar != word[i]) {
+                    var newWord = word.Substring(0,i) + newChar + word.Substring(i+1);
+                    if (wordSet.Contains(newWord)) {
+                        ans.Add(newWord);
+                    }
+                }
+            }     
+        }
+        return ans;
+    }    
+}
+  ```
+
+</details>
