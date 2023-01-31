@@ -72,7 +72,7 @@
         var queue = new Queue<string>(); 
         queue.Enqueue(beginWord);
         wordSet.Remove(beginWord);
-        var count = 0;        
+        var count = 1;        
         while(queue.Count > 0) {
             var size = queue.Count; 
             count++; 
@@ -82,7 +82,7 @@
                 foreach(var neighbor in neighbors) {
                     wordSet.Remove(neighbor);
                     if (neighbor == endWord) 
-                        return count + 1;
+                        return count;
                     else 
                         queue.Enqueue(neighbor);
                 }                
