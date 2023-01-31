@@ -123,3 +123,62 @@
 
 ```
    </details>
+   
+ <details>
+ <summary>Serialize and Deserialize Binary Tree https://leetcode.com/explore/interview/card/google/65/design-4/3092/ </summary>
+
+```cs
+public class Codec {
+    // Encodes a tree to a single string.
+    public string serialize(TreeNode root) {
+        //Format after serialization: 
+        //[1,2,3,null,null,4,5] --> 1(2,3(4,5))
+        if (root == null)
+            return null ;        
+        var data = root.left != null ||  root.right != null ? 
+                    string.Format("{0}({1},{2})", 
+                            root.val, 
+                            root.left == null ? "null" : serialize(root.left), 
+                            root.right == null ? "null" : serialize(root.right))
+             :     root.val.ToString();        
+        return data;       
+    }
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(string data) {
+        if (data == null || data == "null")
+            return null;
+        var ans = new TreeNode(0);
+        var nodeValIndex = data.IndexOf('('); //Find the first 
+        if (nodeValIndex < 0) {
+            ans.val = int.Parse(data);             
+        }
+        else  {            
+            ans.val = int.Parse(data.Substring(0, nodeValIndex));            
+            //Find the ',' with no open or close
+            var childrenStr = data.Substring(nodeValIndex + 1, data.Length - nodeValIndex - 2 ); 
+            
+            int findComma = 0; 
+            int indexOfComma = -1; 
+            int countOpen = 0; 
+            while (findComma < childrenStr.Length ) {
+                if (childrenStr[findComma] == '(') 
+                    countOpen ++; 
+                else if (childrenStr[findComma] == ')') 
+                    countOpen --; 
+                else if (childrenStr[findComma] == ',' && countOpen == 0) {
+                    indexOfComma = findComma; 
+                    findComma = childrenStr.Length;
+                }
+                findComma++;                
+            }
+            if (indexOfComma > 0) {
+                ans.left = deserialize(childrenStr.Substring(0,indexOfComma));
+                ans.right = deserialize(childrenStr.Substring(indexOfComma + 1));
+            }            
+        }
+        return ans;
+    }
+}
+```
+
+</details>
