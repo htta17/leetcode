@@ -69,3 +69,35 @@ public class Trie {
 }
   ```
 </details>
+
+<details>
+  <summary>Implement Trie: https://leetcode.com/explore/learn/card/trie/147/basic-operations/1047/ </summary>
+
+<br/> 
+<b>Solution 1</b>: Brute Force - Using dictionary to store key - value
+
+```cs 
+public class MapSum {
+    Dictionary<string, int> set;
+    public MapSum() {
+        set = new Dictionary<string, int>(); 
+    }    
+    public void Insert(string key, int val) {
+        set[key] = val; //Add or update (overridden) value
+    }    
+    public int Sum(string prefix) {
+        var sum =0; 
+        //Go through all key and check which key contains prefix
+        foreach (var key in set.Keys) {
+            if (key.StartsWith(prefix)) {
+                sum += set[key];
+            }
+        }
+        return sum;
+    }
+}
+```
+
+  
+</details>
+  
