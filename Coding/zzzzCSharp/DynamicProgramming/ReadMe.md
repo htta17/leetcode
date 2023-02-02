@@ -1,5 +1,5 @@
 <details>
-  <summary>https://leetcode.com/problems/minimum-window-subsequence/description/ </summary>
+  <summary>Minimum Window Subsequence https://leetcode.com/problems/minimum-window-subsequence/description/ </summary>
   
   We can use dynamic programming <br/>
   Use a memo[len1, len2] with len1 is length of s1 and len2 is the length of s2 <br/>
