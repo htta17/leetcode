@@ -62,3 +62,30 @@
   
   
 </details>
+
+<details>
+<summary>Maximum Product Subarray https://leetcode.com/explore/interview/card/google/64/dynamic-programming-4/3087/ </summary>
+
+
+```cs
+public int MaxProduct(int[] nums) {
+        //If all numbers are positive, we just need to multiple all items
+        //If there is a 0, we restart the substring from next position 
+        //For negative number, we need to store another sub array with negative number, 
+        //      and hope it will flip when see this number        
+        int answer = nums[0], minSub = nums[0], maxSub = nums[0];        
+        for (int i=1; i< nums.Length; i++) {           
+            var currMinSub = minSub; 
+            var currMaxSub = maxSub; 
+            //Get MIN of 3 values for minSub: nums[i], minSub * nums[i] and maxSub * nums[i]
+            //Why we need to compare with nums[i], because 0 will reset 
+            minSub = Math.Min(nums[i], Math.Min(currMinSub * nums[i], currMaxSub * nums[i]));             
+            //Get MAX of 3 values for maxSub: nums[i], minSub * nums[i] and maxSub * nums[i]
+            maxSub = Math.Max(nums[i], Math.Max(currMinSub * nums[i], currMaxSub * nums[i]));   
+            //Update answer
+            answer = Math.Max(answer, Math.Max(minSub, maxSub));            
+        }       
+        return answer;   
+    }
+```
+</details>
