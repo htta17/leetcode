@@ -267,10 +267,10 @@ public class Solution {
         this.target = target;
         Array.Sort(candidates);
         ans = new List<IList<int>>(); 
-        BuildList(0, 0, new List<int>(), ""); 
+        BuildList(0, 0, new List<int>()); 
         return ans;
     }
-    void BuildList(int curIdex, int curTotal, List<int> list, string key) {        
+    void BuildList(int curIdex, int curTotal, List<int> list) {        
          if (curTotal == target ) {             
              ans.Add(new List<int>(list));
              return;
@@ -280,7 +280,7 @@ public class Solution {
                                                                     //For example: 1 1 2 5 5, target = 8: 2nd [1] and 2nd [5] will not be jumped in 
                     && curTotal + candidates[i] <= target) {
                 list.Add(candidates[i]);
-                BuildList(i + 1, curTotal + candidates[i], list, key);
+                BuildList(i + 1, curTotal + candidates[i], list);
                 list.RemoveAt(list.Count - 1);
              }
          }        
