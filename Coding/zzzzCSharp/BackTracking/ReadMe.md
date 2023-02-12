@@ -254,4 +254,37 @@ void Fill(Dictionary<int, HashSet<int>> rows,
 </details>
     
  
-
+<details>
+    <summary>Combination Sum II: https://leetcode.com/problems/combination-sum-ii/description/ </summary>
+    
+```cs
+public class Solution {
+    int[] candidates; 
+    List<IList<int>> ans; 
+    int target;
+    public IList<IList<int>> CombinationSum2(int[] candidates, int target) {        
+        this.candidates = candidates; 
+        this.target = target;
+        Array.Sort(candidates);
+        ans = new List<IList<int>>(); 
+        BuildList(0, 0, new List<int>(), ""); 
+        return ans;
+    }
+    void BuildList(int curIdex, int curTotal, List<int> list, string key) {        
+         if (curTotal == target ) {             
+             ans.Add(new List<int>(list));
+             return;
+         }
+         for (int i = curIdex; i< candidates.Length; i++) {
+             if ((i == curIdex || candidates[i] > candidates[i - 1]) //Reduce repeat by taking 1 numbers if there are many numbers the same values
+                                                                    //For example: 1 1 2 5 5, target = 8: 2nd [1] and 2nd [5] will not be jumped in 
+                    && curTotal + candidates[i] <= target) {
+                list.Add(candidates[i]);
+                BuildList(i + 1, curTotal + candidates[i], list, key);
+                list.RemoveAt(list.Count - 1);
+             }
+         }        
+    } 
+}
+```
+</details>
