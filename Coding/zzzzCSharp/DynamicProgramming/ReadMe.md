@@ -89,3 +89,27 @@ public int MaxProduct(int[] nums) {
     }
 ```
 </details>
+
+
+<details>
+<summary>Maximal Square: https://leetcode.com/explore/featured/card/dynamic-programming/631/strategy-for-solving-dp-problems/4046/ </summary>
+
+
+```cs
+public int MaximalSquare(char[][] matrix) {
+    var m = matrix.Length; 
+    var n = matrix[0].Length;
+    int[,] arr = new int[m + 1,n + 1]; 
+    var max = 0;        
+    for (int i=1; i <= m; i++) {
+        for (int j=1; j<=n; j++) {
+            if (matrix[i-1][j-1] == '1') {                    
+                arr[i,j] = Math.Min(Math.Min(arr[i, j-1], arr[i-1, j-1] ), arr[i-1, j]) + 1;
+                max = Math.Max(arr[i,j], max);
+            }
+        }            
+    }        
+    return max * max;
+}
+```
+</details>
