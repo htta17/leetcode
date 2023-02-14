@@ -1,4 +1,36 @@
 <details>
+<summary>Rotate List: https://leetcode.com/problems/rotate-list/submissions/897518626/</summary>
+    
+```cs
+public class Solution {
+    public ListNode RotateRight(ListNode head, int k) {
+        if (head == null)
+            return null; 
+        else if (head.next == null)
+            return head;
+        var list = new ListNode[501]; 
+        var node = head; 
+        var cnt = 0; 
+        while (node != null)  {
+            list[cnt] = node; 
+            cnt++; 
+            node = node.next;
+        }
+        var pos = ( cnt - (k % cnt)) % cnt; 
+        if (pos > 0) {            
+            list[pos - 1].next = null;             
+            list[cnt - 1].next = head;
+        }
+        return list[pos];
+    }
+}
+```
+    
+    
+</details>
+
+
+<details>
 <summary>https://leetcode.com/explore/interview/card/facebook/6/linked-list/319/</summary>
     
 - You are given two non-empty linked lists representing two non-negative integers. 
