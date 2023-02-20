@@ -42,7 +42,8 @@
         root = new int[n];
         rank = new int[n]; 
         for (int i=0; i<n; i++) {
-            root[i] = rank[i] = i; 
+            root[i] = i; 
+            rank[i] = 1;
         }
         count = n;
     }
