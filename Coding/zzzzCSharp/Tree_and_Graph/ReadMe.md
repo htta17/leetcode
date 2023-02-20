@@ -1,4 +1,72 @@
 <details>
+  <summary>Number of Provinces: https://leetcode.com/explore/learn/card/graph/618/disjoint-set/3845/</summary>
+  
+  ```cs
+  public class Solution {
+    int n; 
+    int[] root; 
+    int[] rank; 
+    int count;
+    
+    int find(int x) {
+        if (x == root[x]) {
+            return x;
+        }
+        return root[x] = find(root[x]);
+    }
+    
+    bool isConnected(int x, int y) {
+        return find(x) == find(y);
+    }
+    
+    void union(int x, int y) {
+        var findX = find(x); 
+        var findY = find(y);
+        if (findX != findY) {
+            count--;
+            if (rank[findX] > rank[findY]) {
+                root[findY] = findX;
+            }
+            else if (rank[findX] < rank[findY]) {
+                root[findX] = findY;
+            }
+            else {
+                root[findX] = findY;
+                rank[findY] ++;
+            }
+        }
+    }
+    
+    public void Init(int[][] isConnected) {
+        n = isConnected.Length; 
+        root = new int[n];
+        rank = new int[n]; 
+        for (int i=0; i<n; i++) {
+            root[i] = rank[i] = i; 
+        }
+        count = n;
+    }
+    
+    
+    public int FindCircleNum(int[][] isConnected) {
+        Init(isConnected);
+        
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<n; j++) {
+                if (i != j && isConnected[i][j] == 1) {
+                    union(i,j); 
+                }
+            }
+        }
+        
+        return count;
+    }
+}
+  ```
+  
+
+</details>
+<details>
   <summary>Longest Increasing Path in a Matrix: https://leetcode.com/explore/interview/card/google/61/trees-and-graphs/3072/</summary>
   
   ```cs
