@@ -1,4 +1,50 @@
 <details>
+  <summary>Network Delay Time: https://leetcode.com/explore/learn/card/graph/622/single-source-shortest-path-algorithm/3863/</summary>
+  
+  ```cs
+  public class Solution {
+    public int NetworkDelayTime(int[][] times, int n, int k) {        
+        var min = new int[n+1];
+        var visited = new List<int>();        
+        visited.Add(k);        
+        
+        var grid = new int[n + 1, n + 1];         
+        for(int i =0; i<= n; i++) {
+            min[i] = int.MaxValue;            
+            for (int j =0; j<= n; j++) {
+                grid[i,j] = -1; 
+            }
+        }
+        foreach (var time in times) {            
+            grid[time[0], time[1]] = time[2];            
+        }
+        min[k] = 0;        
+        var index =0;        
+        while (index < visited.Count) {            
+            var newNode = visited[index];
+            for (int i=1; i <= n; i++) {
+                if (newNode != i && grid[newNode, i] >= 0) {                    
+                    if (grid[newNode, i] + min[newNode] < min[i] ) {
+                        visited.Add(i);
+                        min[i] = grid[newNode, i] + min[newNode];
+                    }
+                }
+            }            
+            index ++;
+        }        
+        if (visited.Count < n)
+            return -1;         
+        var max = -1; 
+        for (int i=1; i<=n ; i++)
+            max = Math.Max(max, min[i]);
+         return max;
+    }
+}
+  ```
+  
+</details>
+
+<details>
   <summary>Number of Provinces: https://leetcode.com/explore/learn/card/graph/618/disjoint-set/3845/</summary>
   
   ```cs
