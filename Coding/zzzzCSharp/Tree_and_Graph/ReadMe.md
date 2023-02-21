@@ -1,4 +1,54 @@
 <details>
+  <summary>Cheapest Flights Within K Stops: https://leetcode.com/explore/learn/card/graph/622/single-source-shortest-path-algorithm/3866/</summary>
+  
+  ```cs
+
+    
+    public int FindCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        
+        //Concept: Using BFS to find 
+        var graph = new int[n, n]; 
+        foreach(var fl in flights) {
+            graph[fl[0], fl[1]] = fl[2]; 
+        }
+        var minAns = int.MaxValue; 
+        var queue = new Queue<(int, int)>(); 
+        var visited = new Dictionary<int,int>(); //If a stop is visited, we only go to this stop again 
+                                                        //if fly to there less than current
+        queue.Enqueue((src, 0));        
+        
+        while (queue.Count > 0 && k > -1) {
+            k--;//Reduce number of stop 
+            var size = queue.Count;            
+            for (int i=0; i<size; i++) {
+                var currentStop = queue.Dequeue();
+                var stop = currentStop.Item1;
+                var val = currentStop.Item2;                
+                visited[stop] = val;
+                for (int j=0; j<n; j++) {
+                    if (graph[stop, j] > 0) { //There is a flight from current stop to j
+                        var nextVal = val + graph[stop, j];
+                        if (j == dst) {
+                            minAns = Math.Min(minAns, nextVal);
+                        }
+                        else if (nextVal < minAns 
+                                 && (!visited.ContainsKey(j) || nextVal < visited[j])) { 
+                                        //Fly to j if we have not fly there or value is cheaper 
+                            queue.Enqueue((j, nextVal));
+                        }                            
+                    }
+                }
+            }             
+        }       
+        return minAns == int.MaxValue? - 1 : minAns;        
+    }
+    
+
+  ```
+  
+</details>   
+
+<details>
   <summary>Network Delay Time: https://leetcode.com/explore/learn/card/graph/622/single-source-shortest-path-algorithm/3863/</summary>
   
   ```cs
