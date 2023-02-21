@@ -1,4 +1,57 @@
 <details>
+  <summary>Course Schedule II: https://leetcode.com/explore/learn/card/graph/622/single-source-shortest-path-algorithm/3866/</summary>
+  
+  ```cs
+  public int[] FindOrder(int numCourses, int[][] prerequisites) {
+        //this.numCourses = numCourses;
+        var set = new HashSet<int>[numCourses];
+        foreach (var prerequisite in prerequisites) {
+            //a --> prerequisite[0]
+            //b --> prerequisite[1]
+            //take b then a
+            var a = prerequisite[0];
+            var b = prerequisite[1];
+            if (set[a] == null) {
+                set[a] = new HashSet<int>();                
+            }
+            set[a].Add(b);            
+        }
+        
+        var planned = new HashSet<int>();
+        var count = 0; 
+        var ans = new int[numCourses];
+        while (count < numCourses) {
+            //Find a number which 
+            //1. planned doesn't have it
+            //2. Has set == null or set.Count = 0
+            var courseNo = 0; 
+            while (courseNo < numCourses 
+                   && (planned.Contains(courseNo) || (set[courseNo] != null && set[courseNo].Count >0)))
+                courseNo++; 
+            
+            //Cannot find the start point (loop)
+            if (courseNo == numCourses)
+                return new int[0];
+            
+            //Remove this course from other courses' prerequisite
+            for (int i=0; i< numCourses; i++) {
+                if (set[i] != null) {
+                    set[i].Remove(courseNo);        
+                }                    
+            }             
+            
+            //Add this number to planned
+            planned.Add(courseNo);            
+            //Set ans and inscrease count
+            ans[count] = courseNo;            
+            count++;            
+        }        
+        return ans;
+    }
+  ```
+  
+</details>  
+<details>
   <summary>Cheapest Flights Within K Stops: https://leetcode.com/explore/learn/card/graph/622/single-source-shortest-path-algorithm/3866/</summary>
   
   ```cs
