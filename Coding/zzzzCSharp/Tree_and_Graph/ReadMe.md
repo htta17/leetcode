@@ -1,4 +1,85 @@
 <details>
+  <summary>Alien Dictionary: https://leetcode.com/explore/learn/card/graph/623/kahns-algorithm-for-topological-sorting/3909/</summary>
+  
+  ```cs
+  public class Solution {   
+    HashSet<char>[] previousSet = new HashSet<char>[26]; 
+    //keep the list of all previous charcters 
+    //for example: previousSet['s'] = {'a', 'z', 'j'} means 'a', 'z', 'j' must add to the answer 
+    //before adding 's'
+    HashSet<char> charSet = new HashSet<char>();
+    bool Build(string s1, string s2) {        
+        //1. add all characters of s1 and s2 to charSet    
+        var min = Math.Min(s1.Length, s2.Length);
+        var i=0; 
+        while (i < min ) {
+            charSet.Add(s1[i]);
+            charSet.Add(s2[i]);            
+            if (s1[i] == s2[i]) {
+                i++;
+            }
+            else {               
+                var index = s2[i] - 'a'; 
+                if (previousSet[index] == null) {
+                    previousSet[index] = new HashSet<char>();
+                }
+                previousSet[index].Add(s1[i]);
+                break;
+            }            
+        }        
+        if (i == min && s1.Length > s2.Length )
+            return false; 
+        
+        var max = Math.Max(s1.Length, s2.Length);
+        
+        for (int j= i; j< max; j++) {
+            if (j < s1.Length) charSet.Add(s1[j]);
+            if (j < s2.Length) charSet.Add(s2[j]);
+        }
+        return true;
+    } 
+    
+    public string AlienOrder(string[] words) {
+        var valid = true; 
+        if (words.Length == 1) {
+            for (int i=0; i< words[0].Length; i++)
+                charSet.Add(words[0][i]);
+        }
+        for (int i=0; i< words.Length; i++)
+            for (int j=i+1; j< words.Length; j++) 
+                valid &= Build(words[i], words[j]);        
+        if (!valid)
+            return "";         
+        var ans = ""; 
+        var visitedChars = new HashSet<char>();        
+        while (ans.Length < charSet.Count) {
+            var addingChar = ' ';            
+            for (int i=0; i<26; i++) {
+                var ch = (char)(i + 'a');
+                if (charSet.Contains(ch) && !visitedChars.Contains(ch) && 
+                    (previousSet[i] == null || previousSet[i].Count == 0))  {
+                    
+                    addingChar = ch;
+                    break; 
+                }
+            }
+            if (addingChar == ' ')
+                return "";             
+            ans += addingChar; 
+            visitedChars.Add(addingChar);                        
+            for (int i=0; i<26; i++) {
+                if (previousSet[i] != null)
+                    previousSet[i].Remove(addingChar);
+            }
+        }
+        return ans; 
+    }
+}
+  ```
+  </details>
+  
+
+<details>
   <summary>Course Schedule II: https://leetcode.com/explore/learn/card/graph/622/single-source-shortest-path-algorithm/3866/</summary>
   
   ```cs
