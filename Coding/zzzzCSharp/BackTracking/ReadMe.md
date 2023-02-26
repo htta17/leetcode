@@ -1,4 +1,61 @@
 <details>
+<summary>Cracking the Safe: https://leetcode.com/problems/cracking-the-safe/description/</summary>
+
+```cs
+public class Solution {
+    //There are k^n combines 
+    //We have to make sure all k^n combination appear in the final string 
+    //We will use a HashSet<string> to remember all combine 
+    
+    //Start with n '0' (For example, if n=4-> start with '0000')
+    //Each time, we can append 1 character to the prefix and 1 character to the last
+    //0'000' --> '000' + 1 --> 0001
+    //'000'0 --> 1 + '000'
+    //After this step, we have 3 combinations in the list: '0000', '0001' and '1000'    
+    int n, k; 
+    int noOfCombine; 
+    HashSet<string> visited; 
+    string finalAnswer = "";
+    public string CrackSafe(int n, int k) {
+        this.n = n; 
+        this.k = k; 
+        noOfCombine = (int)Math.Pow(k,n);
+        var ans = "";
+        for (int i=0; i<n; i++)
+            ans += '0';
+        visited = new HashSet<string>();
+        visited.Add(ans);
+        BackTrack(ans);        
+        return finalAnswer;
+    }
+    
+    bool BackTrack(string currentAns) {
+        //Console.WriteLine(currentAns);
+        if (visited.Count == noOfCombine){
+            if (finalAnswer == "")
+                finalAnswer = currentAns;
+            return true; 
+        }        
+        var postfix = currentAns.Substring(0, n - 1);        
+        for (int i=0; i< k; i++) {
+            var newNum = string.Format("{0}{1}", i, postfix);
+            if (!visited.Contains(newNum)) {
+                visited.Add(newNum);                
+                var ret = BackTrack(string.Format("{0}{1}", i, currentAns)); 
+                if (ret) {
+                    return ret;
+                }
+                visited.Remove(newNum);
+            }
+        }
+        return false; 
+    }
+}
+```
+
+</details>
+
+<details>
 <summary>https://leetcode.com/problems/n-queens-ii/</summary>
     
 The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.
