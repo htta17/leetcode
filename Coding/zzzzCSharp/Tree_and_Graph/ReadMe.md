@@ -1,4 +1,35 @@
 <details>
+  <summary>Binary Tree Maximum Path Sum: https://leetcode.com/problems/binary-tree-maximum-path-sum/submissions/905532298/</summary>
+  
+  ```cs
+  public int MaxPathSum(TreeNode root) {
+        MaxGain(root);
+        return maxSum;
+    }
+    
+    int maxSum = int.MinValue;
+    
+    int MaxGain(TreeNode root) {
+        if (root == null) 
+            return 0; 
+        
+        var gainFromLeft = Math.Max( MaxGain(root.left), 0);
+        
+        var gainFromRight = Math.Max( MaxGain(root.right), 0);
+        
+        maxSum = Math.Max(maxSum, gainFromLeft + gainFromRight + root.val);
+
+        return Math.Max(gainFromLeft + root.val, gainFromRight + root.val);
+        
+    }
+  
+  ```
+  
+</details>
+  
+
+
+<details>
   <summary>Alien Dictionary: https://leetcode.com/explore/learn/card/graph/623/kahns-algorithm-for-topological-sorting/3909/</summary>
   
   ```cs
