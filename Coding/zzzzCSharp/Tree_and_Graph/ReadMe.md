@@ -1,4 +1,29 @@
 <details>
+  <summary>Longest Univalue Path: https://leetcode.com/problems/longest-univalue-path/description/</summary>
+  
+  ```cs
+  public class Solution {
+    public int LongestUnivaluePath(TreeNode root) {
+        SumPath(root);
+        return ans;
+    }
+    int ans = 0;
+
+    int SumPath(TreeNode node, int parentValue = -1001) {
+        if (node == null)
+            return 0; 
+        var left = SumPath(node.left, node.val);
+        var right = SumPath(node.right, node.val);
+        ans = Math.Max(ans, left + right);
+        return node.val == parentValue ? Math.Max(left, right) + 1 : 0;
+    }    
+}
+  ```
+  
+  
+</details>  
+
+<details>
   <summary>Binary Tree Maximum Path Sum: https://leetcode.com/problems/binary-tree-maximum-path-sum/submissions/905532298/</summary>
   
   ```cs
