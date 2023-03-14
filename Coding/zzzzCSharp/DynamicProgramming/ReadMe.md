@@ -1,3 +1,32 @@
+<details> 
+  <summary>Word Break https://leetcode.com/problems/word-break </summary>
+  
+  ```cs
+  public class Solution {
+    //Concept: Using dynamic programming
+    //Assume there is a position J of string s which all characters (from 1) to J are possible. 
+    //If we have a way from J to I, so we will have a way from 0 to I    
+    HashSet<string> words; //For checking 
+    public bool WordBreak(string s, IList<string> wordDict) {
+        var n = s.Length;
+        words = new HashSet<string>(wordDict);        
+        var mark = new bool[n + 1];        
+        for (int i=1; i<=n ;i++) {
+            mark[i] = words.Contains(s.Substring(0, i));             
+            if (!mark[i]) {
+                for (int j=1; j<i; j++) {
+                    if (mark[j] && (words.Contains(s.Substring(j, i - j)))) {
+                        mark[i] = true;
+                        break;
+                    }
+                }  
+            }
+        }   
+        return mark[n];
+    }
+}
+  ```
+</details>
 <details>
   <summary>Minimum Window Subsequence https://leetcode.com/problems/minimum-window-subsequence/description/ </summary>
   
