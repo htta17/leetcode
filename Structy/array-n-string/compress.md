@@ -1,11 +1,6 @@
-Write a function, compress, that takes in a string as an argument. The function should return a compressed version of the string where consecutive occurrences of the same characters are compressed into the number of occurrences followed by the character. Single character occurrences should not be changed.
+![image](https://user-images.githubusercontent.com/12803690/228117601-3f7ee5d9-e853-49fe-92ff-6754fa101e4a.png)
 
-'aaa' compresses to '3a'
-'cc' compresses to '2c'
-'t' should remain as 't'
-You can assume that the input only contains a
-
-Use two pointers
+**Use two pointers**
 
 ```py
 def compress(s):
@@ -32,3 +27,6 @@ def compress(s):
 
     return result
 ```
+n = length of string
+Time: O(n)
+Space: O(n)
