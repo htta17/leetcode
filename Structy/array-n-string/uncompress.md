@@ -1,4 +1,7 @@
-using two pointers
+![image](https://user-images.githubusercontent.com/12803690/228117815-99e34578-d983-487c-bb0a-460233b2bde5.png)
+
+
+**using two pointers**
 ```py
 def uncompress(s):
   numbers = '0123456789'
@@ -18,11 +21,8 @@ def uncompress(s):
 ```
 
 n = number of groups
-
 m = max num found in any group
-
 Time: O(n*m)
-
 Space: O(n*m)
 
 ![image](https://user-images.githubusercontent.com/12803690/206103844-c0bc7a94-5b34-4b6d-a69b-6df8882b9f5f.png)
