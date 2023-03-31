@@ -1,6 +1,8 @@
 ![image](https://user-images.githubusercontent.com/12803690/229018380-a6a567a0-821b-452a-bb7c-690ae063f655.png)
 **solutions**
+
 **iterative**
+
 ```
 def linked_list_values(head):
   values = []
@@ -13,7 +15,9 @@ def linked_list_values(head):
 n = number of nodes
 Time: O(n)
 Space: O(n)
+
 **recursive**
+
 ```
 def linked_list_values(head):
   values = []
