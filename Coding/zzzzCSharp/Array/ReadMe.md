@@ -1,4 +1,65 @@
 <details>
+<summary>https://leetcode.com/problems/spiral-matrix-iv
+  </summary>
+  
+  ```cs
+  public int[][] SpiralMatrix(int m, int n, ListNode head) {
+        var matrix = new int[m][]; 
+        for (int i=0; i<m; i++) 
+            matrix[i] = new int[n];
+        var num = 0; 
+        int top =0, bott =m-1, left =0, right = n-1; 
+        var node = head; 
+        var maxNum = m * n;
+        while (num < maxNum) {            
+            for (int i=left; i<=right; i++) {
+                if (num < maxNum) {
+                    num++;                    
+                    matrix[top][i] = node == null ? -1 : node.val;
+                    if (node != null) {
+                        node = node.next;
+                    }
+                }                
+            }
+            top++; 
+            for (int i=top; i<=bott; i++) {
+                if (num < maxNum) {
+                    num++;
+                    matrix[i][right] = node == null ? -1 : node.val;
+                    if (node != null) {
+                        node = node.next;
+                    }
+                }                
+            }
+            right--;
+            for (int i=right; i>=left; i--) {
+                if (num < maxNum) {
+                    num++;
+                    matrix[bott][i] = node == null ? -1 : node.val;
+                    if (node != null) {
+                        node = node.next;
+                    }
+                }                
+            }
+            bott--;
+            for (int i=bott; i>=top; i--) {
+                if (num < maxNum) {
+                    num++;
+                    matrix[i][left] = node == null ? -1 : node.val;
+                    if (node != null) {
+                        node = node.next;
+                    }
+                }                
+            }
+            left++;
+        }
+        return matrix;
+    }
+  ```
+  
+</details>  
+
+<details>
 <summary>Spiral Matrix II https://leetcode.com/problems/spiral-matrix-ii/description/
   </summary>
   
