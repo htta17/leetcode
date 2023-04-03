@@ -1,4 +1,53 @@
 <details>
+<summary>Spiral Matrix II https://leetcode.com/problems/spiral-matrix-ii/description/
+  </summary>
+  
+  ```cs
+  public int[][] GenerateMatrix(int n) {
+        var matrix = new int[n][]; 
+        for (int i=0; i<n; i++) 
+            matrix[i] = new int[n]; 
+        var num = 0; 
+        int top =0, bott =n-1, left =0, right = n-1; 
+
+        while (num < n*n) {            
+            for (int i=left; i<=right; i++) {
+                if (num < n*n) {
+                    num++;
+                    matrix[top][i] = num;
+                }                
+            }
+            top++; 
+            for (int i=top; i<=bott; i++) {
+                if (num < n*n) {
+                    num++;
+                    matrix[i][right] = num;
+                }                
+            }
+            right--;
+            for (int i=right; i>=left; i--) {
+                if (num < n*n) {
+                    num++;
+                    matrix[bott][i] = num;
+                }                
+            }
+            bott--;
+            for (int i=bott; i>=top; i--) {
+                if (num < n*n) {
+                    num++;
+                    matrix[i][left] = num;
+                }                
+            }
+            left++;
+        }
+        return matrix;
+    }
+  ```
+  
+</details>  
+
+
+<details>
   <summary>https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/description/
   </summary>
   
