@@ -1,3 +1,47 @@
+<details>
+<summary>https://leetcode.com/problems/sliding-window-maximum/  </summary>
+
+The concept to solve this issue are: 
+- Use 1 dictionary to store how many time of each element value appears in the list, for example: dic[5]=3 means there are 3 items in sliding window has value 3
+- Use a priority queue to store values in the queue. 
+- With each item, we add new value to dic, and remove the old value not in sliding window.
+  
+  ```cs
+  public int[] MaxSlidingWindow(int[] nums, int k) {
+        var queue = new PriorityQueue<int,int>(); 
+        var dic = new Dictionary<int, int>();
+        var n = nums.Length; 
+        var ans = new int[n - k + 1]; 
+        //Init 
+        for (int i=0; i<k; i++) {
+            var val = nums[i];
+            dic[val] = dic.ContainsKey(val) ? dic[val] + 1 : 1; 
+            queue.Enqueue(val, -val);
+        }
+        ans[0] = queue.Peek(); 
+
+        for (int i=1; i< n - k + 1; i++) {
+            var preVal = nums[i -1]; 
+            if (dic[preVal] == 1) 
+                dic.Remove(preVal);
+            else 
+                dic[preVal]--;           
+            
+            while (queue.Count > 0 && !dic.ContainsKey(queue.Peek())) {
+                queue.Dequeue();
+            }
+            var val = nums[i + k -1];
+            dic[val] = dic.ContainsKey(val) ? dic[val] + 1 : 1; 
+            queue.Enqueue(val, -val);
+            ans[i] = queue.Peek();
+        }
+        return ans;
+    }
+  ```
+  
+</details>  
+
+
 - Given an integer array and a window of size w, find the current maximum value in the window as it slides through the entire array.
 ```javascript
 export function findMaxSlidingWindow(nums, w) {
