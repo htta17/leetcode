@@ -1,4 +1,57 @@
 <details>
+<summary>Game of Life: https://leetcode.com/problems/game-of-life/description/
+  </summary>
+
+```cs
+
+    public void GameOfLife(int[][] board) {
+        //The concept is counting the current states and make it to next generation         
+        //If we use additional space, it's easy.         
+        //The issue is solving in-place.         
+        //Solve: Counting all neighbors has value 1, and put use [+] if current value is 1
+        //          and [-] if current value is 0         
+        var n = board.Length; 
+        var m = board[0].Length;         
+        var rows = new int[] {-1, -1, -1, 0, 0, 1, 1, 1};
+        var cols = new int[] {-1, 0, 1, -1, 1, -1, 0, 1};
+        for (int i=0; i< n; i++){
+            for (int j=0; j< m; j++) {
+                var count = 0; 
+                for (int k=0; k<8; k++) {
+                    var checkRow = i + rows[k];
+                    var checkCol = j + cols[k];
+                    if (checkRow >=0 && checkRow < n 
+                            && checkCol >=0 && checkCol < m 
+                            && board[checkRow][checkCol] > 0) {
+                        count++; 
+                    }                    
+                }
+                board[i][j] = count == 0 
+                                ? (board[i][j] == 1 ? 9 : count) 
+                                : board[i][j] == 1 ? count : -count;               
+            }
+        }        
+        
+        for (int i=0; i< n; i++){
+            for (int j=0; j< m; j++) {
+                if (board[i][j] > 0) {//current lives, 
+                    board[i][j] = board[i][j] == 1 || board[i][j] > 3 
+                                    ? 0 : 1;                    
+                }
+                else { //current dies
+                    board[i][j] = board[i][j] == -3 ? 1 : 0;                    
+                }
+            }
+        }
+    }
+
+```
+  
+  
+ </details>
+
+
+<details>
 <summary>https://leetcode.com/problems/spiral-matrix-iv
   </summary>
   
