@@ -1,4 +1,10 @@
 ![image](https://user-images.githubusercontent.com/12803690/229689765-344d4c6d-057a-4314-831a-104ef450fdb4.png)
+We need a tail node to track the tail of our zipped list:
+![image](https://user-images.githubusercontent.com/12803690/231336222-5b165481-089d-4483-927a-16fb876c8e5a.png)
+![image](https://user-images.githubusercontent.com/12803690/231336283-085eb1c4-57d3-4054-82b4-e3c489b8c29f.png)
+![image](https://user-images.githubusercontent.com/12803690/231336376-02bb48fa-7750-4270-a248-1c035c3a298f.png)
+![image](https://user-images.githubusercontent.com/12803690/231336425-55c7f180-eaf5-4e0d-9fd0-d6f1e510e239.png)
+
 **solutions**
 **iterative**
 ```python
