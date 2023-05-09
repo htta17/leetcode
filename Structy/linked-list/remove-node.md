@@ -1,4 +1,6 @@
 ![image](https://user-images.githubusercontent.com/12803690/236656988-db610026-e4b6-41ef-b1d7-911ac2394dcb.png)
+![image](https://user-images.githubusercontent.com/12803690/236994432-9ebe6bce-6ba8-4fb6-87af-9defd3d1d658.png)
+
 # solutions
 ### iterative
 ```python
