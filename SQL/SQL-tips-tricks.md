@@ -6,5 +6,7 @@
 
 ### DATE/TIMESTAMP CONVERSION
 To convert from TIMESTAMP to DATE with time part 00:00:00
+
 Example: 07/10/2022 09:00:00 -> 07/10/2022 00:00:00
+
 CAST(@ParamDate AS DATE)
