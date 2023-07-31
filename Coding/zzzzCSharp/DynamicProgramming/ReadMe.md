@@ -1,4 +1,31 @@
 <details> 
+  <summary>https://leetcode.com/problems/decode-ways</summary>
+  
+   ```cs
+  public class Solution {
+  
+    public int NumDecodings(string s) {
+        var n = s.Length;        
+        var count = new int[n];
+
+        //Init for first count
+        //If s[0]=='0' --> No way to get it
+        //If s[0]==[1,9] --> 1 way
+        count[0] = s[0] == '0' ? 0 : 1; 
+        for (int i=1; i<n; i++) {
+            var count_i_1 = s[i] == '0' ? 0 : count[i-1]; //If s[i] from [1,9], get count[i-1] 
+            var count_i_2 = (s[i-1] == '1' || (s[i-1] == '2' && s[i]>='0' &&s[i] <= '6')) //s[i-1] & s[i] make a number from 10 to 26
+                        ? (i==1 ? 1 : count[i-2]) 
+                        : 0; 
+            count[i] = count_i_1 + count_i_2; 
+        }
+        return count[n -1];        
+    }
+}
+  ```
+</details>
+
+<details> 
   <summary>Word Break https://leetcode.com/problems/word-break </summary>
   
   ```cs
