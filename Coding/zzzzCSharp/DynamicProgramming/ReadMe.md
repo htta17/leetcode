@@ -1,4 +1,52 @@
 <details> 
+  <summary>https://leetcode.com/problems/range-sum-query-2d-immutable</summary>
+
+
+```cs
+    
+/*
+The concept is calculate all items from (0,0) --> (m,n) and save to an array precal[m,n]
+The sum from (a,b) --> (m,n): precal[m,n] - precal[m,b] - precal[a,n] + precal[a,b]
+*/
+
+public class NumMatrix {
+    int[,] precal;
+
+    public NumMatrix(int[][] matrix) {
+        var m = matrix.Length;
+        var n = matrix[0].Length; 
+        precal = new int[m,n];        
+
+        precal[0,0] = matrix[0][0];
+
+        for (int i=1; i< m; i++)
+            precal[i,0] = precal[i-1,0] + matrix[i][0];
+
+        for (int j=1; j< n; j++)
+            precal[0,j] = precal[0,j-1] + matrix[0][j];
+
+        for (int i=1; i<m; i++) {
+            for (int j=1; j<n; j++) {
+                precal[i,j] = precal[i-1,j] + precal[i,j-1] + matrix[i][j] 
+                                - precal[i-1,j-1]; 
+            }
+        }
+    } 
+    
+    public int SumRegion(int row1, int col1, int row2, int col2) {
+        return precal[row2,col2] 
+                    - (col1 > 0 ? precal[row2,col1 - 1] : 0)
+                    - (row1 > 0 ? precal[row1 - 1,col2] : 0) 
+                    + (row1 > 0 && col1 > 0 ? precal[row1 - 1,col1 -1] : 0);         
+    }
+}
+
+
+```
+
+</details>
+
+<details> 
   <summary>https://leetcode.com/problems/decode-ways</summary>
   
    ```cs
