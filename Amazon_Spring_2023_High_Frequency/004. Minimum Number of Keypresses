@@ -1,0 +1,42 @@
+public class Solution {
+    public int MinimumKeypresses(string s) {
+        //Order by frequency
+
+        //1-9: 1 press
+        //10-18: 2 presses
+        //19-26
+
+        var count = new int[26]; 
+
+        foreach(var c in s) {
+            count[c - 'a'] ++; 
+        }
+
+        var queue = new PriorityQueue<int, int>(); 
+
+        for (var i=0; i<26; i++) {
+            queue.Enqueue(count[i], -count[i] );
+        }
+
+        var ans = 0; 
+        var index = 0; 
+
+        while (queue.Count > 0) {
+            index++; 
+            var curr = queue.Dequeue(); 
+
+            if (index >= 1 && index <=9) {
+                ans += curr; 
+            }
+            else if (index >= 10 && index <= 18) {
+                ans += 2 * curr; 
+            }
+            else {
+                ans += 3 * curr; 
+            }
+        }
+
+        return ans;
+
+    }
+}
